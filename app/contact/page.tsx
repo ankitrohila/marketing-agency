@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import Footer from "@/components/sections/Footer";
+import BookingModal from "@/components/BookingModal";
 
 gsap.registerPlugin(useGSAP);
 
@@ -23,9 +24,10 @@ const inputStyle: React.CSSProperties = {
 
 export default function ContactPage() {
   const heroRef = useRef<HTMLElement>(null);
-  const [open,    setOpen]    = useState<number | null>(null);
-  const [sending, setSending] = useState(false);
-  const [sent,    setSent]    = useState(false);
+  const [open,        setOpen]        = useState<number | null>(null);
+  const [sending,     setSending]     = useState(false);
+  const [sent,        setSent]        = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useGSAP(() => {
     gsap.from(".contact-word", { y: "100%", stagger: 0.06, duration: 0.9, ease: "power4.out" });
@@ -102,9 +104,19 @@ export default function ContactPage() {
 
               <div style={{ marginTop: 48, padding: 28, borderRadius: 16, background: "var(--bt-surface)", border: "1px solid var(--bt-border)" }}>
                 <div style={{ fontWeight: 700, color: "var(--bt-white)", marginBottom: 8 }}>Free Strategy Session</div>
-                <p style={{ fontSize: "0.875rem", color: "var(--bt-muted)", lineHeight: 1.65 }}>
+                <p style={{ fontSize: "0.875rem", color: "var(--bt-muted)", lineHeight: 1.65, marginBottom: 16 }}>
                   Not sure where to start? Book a free 30-minute strategy call and we'll map out exactly what growth levers are available for your brand.
                 </p>
+                <button
+                  onClick={() => setBookingOpen(true)}
+                  className="btn btn-primary"
+                  style={{ fontSize: "0.875rem", padding: "10px 20px" }}
+                >
+                  📅 Book Free Strategy Call
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
               </div>
             </div>
 
@@ -193,6 +205,7 @@ export default function ContactPage() {
       </section>
 
       <Footer />
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
     </>
   );
 }

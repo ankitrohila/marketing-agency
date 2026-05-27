@@ -41,8 +41,9 @@ const navSections = [
         href: "/admin/posts",
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" />
-            <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" />
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" />
           </svg>
         ),
       },
@@ -51,7 +52,8 @@ const navSections = [
         href: "/admin/categories",
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" />
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+            <line x1="7" y1="7" x2="7.01" y2="7" />
           </svg>
         ),
       },
@@ -60,8 +62,58 @@ const navSections = [
         href: "/admin/media",
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" />
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
             <polyline points="21 15 16 10 5 21" />
+          </svg>
+        ),
+      },
+    ],
+  },
+  {
+    title: "Forms & Leads",
+    items: [
+      {
+        label: "Form Builder",
+        href: "/admin/forms",
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <line x1="3" y1="9" x2="21" y2="9"/>
+            <line x1="9" y1="21" x2="9" y2="9"/>
+          </svg>
+        ),
+      },
+      {
+        label: "Leads",
+        href: "/admin/leads",
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/>
+          </svg>
+        ),
+      },
+      {
+        label: "Subscribers",
+        href: "/admin/subscribers",
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        ),
+      },
+      {
+        label: "Bookings",
+        href: "/admin/bookings",
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
         ),
       },
@@ -76,8 +128,10 @@ const navSections = [
         roles: ["super_admin", "admin"],
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
           </svg>
         ),
       },
@@ -91,7 +145,8 @@ const navSections = [
         href: "/admin/seo",
         icon: (
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
         ),
       },
@@ -100,6 +155,27 @@ const navSections = [
   {
     title: "Tools",
     items: [
+      {
+        label: "Database Guide",
+        href: "/admin/database",
+        roles: ["super_admin"],
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        ),
+      },
+      {
+        label: "Backup & Changelog",
+        href: "/admin/backup",
+        roles: ["super_admin"],
+        icon: (
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.71"/>
+          </svg>
+        ),
+      },
       {
         label: "File Manager",
         href: "/admin/files",
@@ -129,9 +205,15 @@ const navSections = [
   },
 ];
 
-export default function AdminSidebar({ user }: { user: AdminUser | null }) {
+interface AdminSidebarProps {
+  user: AdminUser | null;
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function AdminSidebar({ user, open, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
-  const router = useRouter();
+  const router   = useRouter();
 
   function handleLogout() {
     localStorage.removeItem("bt_admin_token");
@@ -150,49 +232,36 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
     return item.roles.includes(user.role);
   }
 
-  return (
-    <aside
-      style={{
-        width: 240,
-        flexShrink: 0,
-        background: "#0d0d0d",
-        borderRight: "1px solid rgba(255,255,255,0.06)",
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        position: "sticky",
-        top: 0,
-        overflowY: "auto",
-      }}
-    >
+  const sidebarContent = (
+    <>
       {/* Logo */}
-      <div
-        style={{
-          padding: "20px 20px 16px",
-          borderBottom: "1px solid rgba(255,255,255,0.06)",
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+      <div style={{ padding: "20px 20px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{ fontSize: "1.25rem", fontWeight: 900, color: "#E8312A", letterSpacing: "-0.04em" }}>
             BrandThink
           </span>
+          {/* Close button — mobile only */}
+          <button
+            onClick={onClose}
+            className="admin-sidebar-close"
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "rgba(255,255,255,0.4)", padding: 4, borderRadius: 6,
+              display: "none", /* shown via CSS media query */
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
         </div>
-        <span
-          style={{
-            display: "inline-block",
-            marginTop: 4,
-            padding: "2px 8px",
-            borderRadius: 4,
-            background: "rgba(232,49,42,0.12)",
-            border: "1px solid rgba(232,49,42,0.25)",
-            color: "#E8312A",
-            fontSize: "0.625rem",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}
-        >
+        <span style={{
+          display: "inline-block", marginTop: 4,
+          padding: "2px 8px", borderRadius: 4,
+          background: "rgba(232,49,42,0.12)", border: "1px solid rgba(232,49,42,0.25)",
+          color: "#E8312A", fontSize: "0.625rem", fontWeight: 700,
+          letterSpacing: "0.1em", textTransform: "uppercase",
+        }}>
           Admin Panel
         </span>
       </div>
@@ -204,16 +273,11 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
           if (visibleItems.length === 0) return null;
           return (
             <div key={section.title} style={{ marginBottom: 4 }}>
-              <div
-                style={{
-                  fontSize: "0.5625rem",
-                  fontWeight: 700,
-                  color: "rgba(255,255,255,0.3)",
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  padding: "10px 10px 4px",
-                }}
-              >
+              <div style={{
+                fontSize: "0.5625rem", fontWeight: 700,
+                color: "rgba(255,255,255,0.3)", letterSpacing: "0.12em",
+                textTransform: "uppercase", padding: "10px 10px 4px",
+              }}>
                 {section.title}
               </div>
               {visibleItems.map((item) => {
@@ -222,20 +286,17 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={onClose}
                     style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                      padding: "9px 10px",
-                      borderRadius: 8,
+                      display: "flex", alignItems: "center", gap: 10,
+                      padding: "9px 10px", borderRadius: 8,
                       textDecoration: "none",
                       fontSize: "0.875rem",
                       fontWeight: active ? 600 : 500,
                       color: active ? "#E8312A" : "rgba(255,255,255,0.55)",
                       background: active ? "rgba(232,49,42,0.10)" : "transparent",
                       borderLeft: active ? "3px solid #E8312A" : "3px solid transparent",
-                      transition: "all 0.15s",
-                      marginBottom: 2,
+                      transition: "all 0.15s", marginBottom: 2,
                     }}
                     onMouseEnter={(e) => {
                       if (!active) {
@@ -261,20 +322,11 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
       </nav>
 
       {/* User footer */}
-      <div
-        style={{
-          padding: "14px 16px",
-          borderTop: "1px solid rgba(255,255,255,0.06)",
-          flexShrink: 0,
-        }}
-      >
+      <div style={{ padding: "14px 16px", borderTop: "1px solid rgba(255,255,255,0.06)", flexShrink: 0 }}>
         {user ? (
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <img
-              src={user.avatar}
-              alt={user.name}
-              style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
-            />
+            <img src={user.avatar} alt={user.name}
+              style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#F5F5F5", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                 {user.name}
@@ -286,15 +338,7 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
             <button
               onClick={handleLogout}
               title="Logout"
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                color: "rgba(255,255,255,0.4)",
-                padding: 4,
-                borderRadius: 6,
-                transition: "color 0.2s",
-              }}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.4)", padding: 4, borderRadius: 6, transition: "color 0.2s" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#E8312A")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.4)")}
             >
@@ -309,6 +353,59 @@ export default function AdminSidebar({ user }: { user: AdminUser | null }) {
           <div style={{ height: 40 }} />
         )}
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Mobile overlay backdrop */}
+      {open && (
+        <div
+          onClick={onClose}
+          style={{
+            position: "fixed", inset: 0, background: "rgba(0,0,0,0.65)",
+            zIndex: 998, display: "none",
+          }}
+          className="admin-sidebar-backdrop"
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className="admin-sidebar"
+        style={{
+          width: 240,
+          flexShrink: 0,
+          background: "#0d0d0d",
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          position: "sticky",
+          top: 0,
+          overflowY: "auto",
+          zIndex: 999,
+          transition: "transform 0.3s ease",
+        }}
+      >
+        {sidebarContent}
+      </aside>
+
+      {/* Inject responsive CSS */}
+      <style>{`
+        @media (max-width: 768px) {
+          .admin-sidebar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            height: 100vh !important;
+            transform: ${open ? "translateX(0)" : "translateX(-100%)"} !important;
+          }
+          .admin-sidebar-backdrop { display: block !important; }
+          .admin-sidebar-close { display: flex !important; }
+        }
+      `}</style>
+    </>
   );
 }

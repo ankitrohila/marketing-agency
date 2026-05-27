@@ -1,8 +1,10 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BookingModal from "@/components/BookingModal";
+import LeadCaptureModal from "@/components/LeadCaptureModal";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -27,9 +29,11 @@ const ROUND_CARDS = [
 ];
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef   = useRef<HTMLDivElement>(null);
-  const hScrollRef = useRef<HTMLElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
+  const cardsRef    = useRef<HTMLDivElement>(null);
+  const hScrollRef  = useRef<HTMLElement>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [leadOpen,    setLeadOpen]    = useState(false);
 
   useGSAP(() => {
     /* ── 1. Hero title reveal ─────────────────────────────────── */
@@ -215,15 +219,19 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="hero-sub" style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 40 }}>
-            <a href="/contact" className="btn btn-primary" style={{ fontSize: "1rem", padding: "14px 32px" }}>
+            <button onClick={() => setLeadOpen(true)} className="btn btn-primary" style={{ fontSize: "1rem", padding: "14px 32px" }}>
               Start a Project
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </a>
-            <a href="/work" className="btn btn-secondary" style={{ fontSize: "1rem", padding: "14px 32px" }}>
-              See Our Work
-            </a>
+            </button>
+            <button
+              onClick={() => setBookingOpen(true)}
+              className="btn btn-secondary"
+              style={{ fontSize: "1rem", padding: "14px 32px", display: "flex", alignItems: "center", gap: 8 }}
+            >
+              📅 Book a Free Call
+            </button>
           </div>
 
           {/* Metrics strip */}
@@ -306,6 +314,10 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {/* Modals */}
+      <BookingModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <LeadCaptureModal isOpen={leadOpen} onClose={() => setLeadOpen(false)} />
     </>
   );
 }

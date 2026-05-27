@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,7 +15,7 @@ const POSTS = [
     date: "May 2025",
     readTime: "8 min",
     img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "Most D2C brands chase ROAS but miss the three structural things that actually make paid acquisition profitable at scale.",
     accent: "#E8312A",
     featured: true,
@@ -26,7 +26,7 @@ const POSTS = [
     date: "Apr 2025",
     readTime: "6 min",
     img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "A breakdown of the CDP, CRM, and attribution architecture we built — and the exact decisions that moved the needle.",
     accent: "#38BDF8",
     featured: false,
@@ -37,7 +37,7 @@ const POSTS = [
     date: "Apr 2025",
     readTime: "5 min",
     img: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "The brands that grow fastest don't choose between brand-building and performance — they treat them as a unified system.",
     accent: "#8B5CF6",
     featured: false,
@@ -48,7 +48,7 @@ const POSTS = [
     date: "Mar 2025",
     readTime: "10 min",
     img: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "The full story of building NovaBev — from naming, identity, and positioning to the go-to-market engine that hit ₹1Cr/month.",
     accent: "#A78BFA",
     featured: false,
@@ -59,7 +59,7 @@ const POSTS = [
     date: "Mar 2025",
     readTime: "7 min",
     img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "Our internal AI-assisted creative pipeline — built on top of standard production workflows — and what it actually saves us.",
     accent: "#FB923C",
     featured: false,
@@ -70,7 +70,7 @@ const POSTS = [
     date: "Feb 2025",
     readTime: "6 min",
     img: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&h=480&q=80",
-    slug: "#",
+    slug: "/blog",
     excerpt: "Why CPM and impressions are the wrong metrics for influencer marketing — and what to measure instead if you want revenue.",
     accent: "#F472B6",
     featured: false,
@@ -81,10 +81,22 @@ const CATEGORIES = ["All", "Performance", "Brand", "MarTech", "Creative", "Case 
 
 export default function InsightsPage() {
   const heroRef = useRef<HTMLElement>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [subEmail, setSubEmail]   = useState("");
+  const [subState, setSubState]   = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [subMsg,   setSubMsg]     = useState("");
+
+  const filtered =
+    activeCategory === "All"
+      ? POSTS
+      : POSTS.filter((p) => p.category === activeCategory);
+
+  const featured = POSTS.find((p) => p.featured)!;
+  const rest      = filtered.filter((p) => !p.featured || activeCategory !== "All");
 
   useGSAP(() => {
     gsap.from(".ins-word", { y: "100%", stagger: 0.06, duration: 0.9, ease: "power4.out" });
-    gsap.from(".ins-sub", { opacity: 0, y: 20, stagger: 0.1, duration: 0.7, delay: 0.5 });
+    gsap.from(".ins-sub",  { opacity: 0, y: 20, stagger: 0.1, duration: 0.7, delay: 0.5 });
     gsap.utils.toArray<HTMLElement>(".post-card").forEach((card) => {
       gsap.from(card, {
         opacity: 0, y: 40, duration: 0.7, ease: "power3.out",
@@ -93,8 +105,30 @@ export default function InsightsPage() {
     });
   }, { scope: heroRef });
 
-  const featured = POSTS.find((p) => p.featured)!;
-  const rest = POSTS.filter((p) => !p.featured);
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!subEmail) return;
+    setSubState("loading");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: subEmail, source: "insights_page" }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubState("success");
+        setSubMsg(data.message);
+        setSubEmail("");
+      } else {
+        setSubState("error");
+        setSubMsg(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setSubState("error");
+      setSubMsg("Connection error. Please try again.");
+    }
+  }
 
   return (
     <>
@@ -122,96 +156,121 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* Category filters */}
+      {/* Category filters — now functional */}
       <section style={{ background: "var(--bt-black)", padding: "0 24px 40px" }}>
         <div className="container">
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {CATEGORIES.map((cat) => (
-              <button key={cat} style={{
-                padding: "8px 20px", borderRadius: 99, fontSize: "0.875rem",
-                fontWeight: 600, cursor: "pointer",
-                background: cat === "All" ? "linear-gradient(135deg,#E8312A,#FF6B1A)" : "transparent",
-                color: cat === "All" ? "#ffffff" : "var(--bt-muted)",
-                border: cat === "All" ? "none" : "1px solid var(--bt-border)",
-              }}>{cat}</button>
-            ))}
+            {CATEGORIES.map((cat) => {
+              const isActive = cat === activeCategory;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  style={{
+                    padding: "8px 20px",
+                    borderRadius: 99,
+                    fontSize: "0.875rem",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    background: isActive ? "linear-gradient(135deg,#E8312A,#FF6B1A)" : "transparent",
+                    color: isActive ? "#ffffff" : "var(--bt-muted)",
+                    border: isActive ? "none" : "1px solid var(--bt-border)",
+                  }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Featured post */}
-      <section className="section-sm" style={{ background: "var(--bt-black)", paddingTop: 0 }}>
-        <div className="container">
-          <Link href={featured.slug} className="post-card featured-post-grid" style={{
-            display: "grid", gridTemplateColumns: "1fr 1fr",
-            gap: 0, borderRadius: 20, overflow: "hidden",
-            border: "1px solid var(--bt-border)", textDecoration: "none",
-            transition: "border-color 0.3s",
-          }}>
-            <div className="featured-post-img" style={{ height: 400, overflow: "hidden" }}>
-              <img src={featured.img} alt={featured.title}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.6s" }}
-                loading="lazy" />
-            </div>
-            <div style={{ padding: "48px 48px", background: "var(--bt-surface)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
-                <span style={{ padding: "4px 12px", borderRadius: 99, background: "rgba(232,49,42,0.12)", border: "1px solid rgba(232,49,42,0.25)", color: "#E8312A", fontSize: "0.6875rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                  Featured
-                </span>
-                <span style={{ padding: "4px 12px", borderRadius: 99, border: "1px solid var(--bt-border)", color: "var(--bt-muted)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                  {featured.category}
-                </span>
+      {/* Featured post — only shown when "All" tab is active */}
+      {activeCategory === "All" && (
+        <section className="section-sm" style={{ background: "var(--bt-black)", paddingTop: 0 }}>
+          <div className="container">
+            <Link href={featured.slug} className="post-card featured-post-grid" style={{
+              display: "grid", gridTemplateColumns: "1fr 1fr",
+              gap: 0, borderRadius: 20, overflow: "hidden",
+              border: "1px solid var(--bt-border)", textDecoration: "none",
+              transition: "border-color 0.3s, transform 0.3s",
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+            >
+              <div className="featured-post-img" style={{ minHeight: 400, overflow: "hidden" }}>
+                <img src={featured.img} alt={featured.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.6s" }}
+                  loading="lazy" />
               </div>
-              <h2 style={{ fontSize: "clamp(1.25rem, 2vw, 1.875rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--bt-white)", marginBottom: 16, lineHeight: 1.2 }}>{featured.title}</h2>
-              <p style={{ fontSize: "0.9375rem", color: "var(--bt-muted)", lineHeight: 1.7, marginBottom: 24 }}>{featured.excerpt}</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: "0.8125rem", color: "var(--bt-muted)" }}>
-                <span>{featured.date}</span>
-                <span>·</span>
-                <span>{featured.readTime} read</span>
-                <span style={{ marginLeft: "auto", color: "var(--bt-red)", fontWeight: 600 }}>Read →</span>
+              <div style={{ padding: "48px 48px", background: "var(--bt-surface)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
+                  <span style={{ padding: "4px 12px", borderRadius: 99, background: "rgba(232,49,42,0.12)", border: "1px solid rgba(232,49,42,0.25)", color: "#E8312A", fontSize: "0.6875rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    Featured
+                  </span>
+                  <span style={{ padding: "4px 12px", borderRadius: 99, border: "1px solid var(--bt-border)", color: "var(--bt-muted)", fontSize: "0.6875rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                    {featured.category}
+                  </span>
+                </div>
+                <h2 style={{ fontSize: "clamp(1.25rem, 2vw, 1.875rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--bt-white)", marginBottom: 16, lineHeight: 1.2 }}>{featured.title}</h2>
+                <p style={{ fontSize: "0.9375rem", color: "var(--bt-muted)", lineHeight: 1.7, marginBottom: 24 }}>{featured.excerpt}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: "0.8125rem", color: "var(--bt-muted)" }}>
+                  <span>{featured.date}</span>
+                  <span>·</span>
+                  <span>{featured.readTime} read</span>
+                  <span style={{ marginLeft: "auto", color: "var(--bt-red)", fontWeight: 600 }}>Read →</span>
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
-      </section>
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Post grid */}
       <section style={{ background: "var(--bt-surface)", padding: "80px 40px" }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 380px), 1fr))", gap: 24 }}>
-            {rest.map((post) => (
-              <Link
-                key={post.title}
-                href={post.slug}
-                className="post-card card"
-                style={{ textDecoration: "none", display: "block", background: "var(--bt-card)", overflow: "hidden" }}
-              >
-                <div style={{ height: 220, overflow: "hidden" }}>
-                  <img src={post.img} alt={post.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.6s" }}
-                    loading="lazy" />
-                </div>
-                <div style={{ padding: "24px 28px 28px" }}>
-                  <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-                    <span style={{ padding: "3px 10px", borderRadius: 99, border: `1px solid ${post.accent}40`, color: post.accent, fontSize: "0.625rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                      {post.category}
-                    </span>
+          {rest.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "60px 0", color: "var(--bt-muted)", fontSize: "1rem" }}>
+              No articles in this category yet. Check back soon.
+            </div>
+          ) : (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 380px), 1fr))", gap: 24 }}>
+              {rest.map((post) => (
+                <Link
+                  key={post.title}
+                  href={post.slug}
+                  className="post-card card"
+                  style={{ textDecoration: "none", display: "block", background: "var(--bt-card)", overflow: "hidden", borderRadius: 16, transition: "transform 0.3s" }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
+                >
+                  <div style={{ height: 220, overflow: "hidden" }}>
+                    <img src={post.img} alt={post.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.6s" }}
+                      loading="lazy" />
                   </div>
-                  <h3 style={{ fontSize: "1.0625rem", fontWeight: 800, letterSpacing: "-0.02em", color: "var(--bt-white)", marginBottom: 10, lineHeight: 1.3 }}>{post.title}</h3>
-                  <p style={{ fontSize: "0.875rem", color: "var(--bt-muted)", lineHeight: 1.65, marginBottom: 20 }}>{post.excerpt}</p>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: "0.75rem", color: "var(--bt-muted)" }}>
-                    <span>{post.date}</span>
-                    <span>·</span>
-                    <span>{post.readTime} read</span>
+                  <div style={{ padding: "24px 28px 28px" }}>
+                    <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+                      <span style={{ padding: "3px 10px", borderRadius: 99, border: `1px solid ${post.accent}40`, color: post.accent, fontSize: "0.625rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                        {post.category}
+                      </span>
+                    </div>
+                    <h3 style={{ fontSize: "1.0625rem", fontWeight: 800, letterSpacing: "-0.02em", color: "var(--bt-white)", marginBottom: 10, lineHeight: 1.3 }}>{post.title}</h3>
+                    <p style={{ fontSize: "0.875rem", color: "var(--bt-muted)", lineHeight: 1.65, marginBottom: 20 }}>{post.excerpt}</p>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--bt-muted)" }}>
+                      <span>{post.date} · {post.readTime} read</span>
+                      <span style={{ color: "var(--bt-red)", fontWeight: 600 }}>Read →</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Newsletter CTA */}
+      {/* Newsletter CTA — now functional */}
       <section style={{ background: "var(--bt-black)", padding: "80px 40px" }}>
         <div className="container" style={{ maxWidth: 600, textAlign: "center" }}>
           <span className="chip" style={{ marginBottom: 20 }}>Newsletter</span>
@@ -221,21 +280,52 @@ export default function InsightsPage() {
           <p style={{ fontSize: "1rem", color: "var(--bt-muted)", lineHeight: 1.75, marginBottom: 32 }}>
             One email every week. No fluff — just strategy, frameworks, and what&apos;s actually working in growth marketing right now.
           </p>
-          <div style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", flexWrap: "wrap" }}>
-            <input
-              type="email"
-              placeholder="your@email.com"
-              style={{
-                flex: 1, minWidth: 200, padding: "14px 20px", borderRadius: 99,
-                background: "var(--bt-card)", border: "1px solid var(--bt-border)",
-                color: "var(--bt-white)", fontSize: "0.9375rem", outline: "none",
-                fontFamily: "inherit",
-              }}
-            />
-            <button className="btn btn-primary" style={{ padding: "14px 28px", whiteSpace: "nowrap" }}>
-              Subscribe
-            </button>
-          </div>
+
+          {subState === "success" ? (
+            <div style={{
+              padding: "20px 28px",
+              borderRadius: 16,
+              background: "rgba(52,211,153,0.1)",
+              border: "1px solid rgba(52,211,153,0.25)",
+              color: "#34D399",
+              fontWeight: 600,
+              fontSize: "0.9375rem",
+            }}>
+              ✓ {subMsg}
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubscribe}
+              style={{ display: "flex", gap: 12, maxWidth: 480, margin: "0 auto", flexWrap: "wrap" }}
+            >
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={subEmail}
+                onChange={(e) => setSubEmail(e.target.value)}
+                required
+                style={{
+                  flex: 1, minWidth: 200, padding: "14px 20px", borderRadius: 99,
+                  background: "var(--bt-card)", border: "1px solid var(--bt-border)",
+                  color: "var(--bt-white)", fontSize: "0.9375rem", outline: "none",
+                  fontFamily: "inherit",
+                }}
+              />
+              <button
+                type="submit"
+                disabled={subState === "loading"}
+                className="btn btn-primary"
+                style={{ padding: "14px 28px", whiteSpace: "nowrap", opacity: subState === "loading" ? 0.7 : 1 }}
+              >
+                {subState === "loading" ? "Subscribing…" : "Subscribe"}
+              </button>
+              {subState === "error" && (
+                <p style={{ width: "100%", textAlign: "center", color: "#F87171", fontSize: "0.875rem", marginTop: 4 }}>
+                  {subMsg}
+                </p>
+              )}
+            </form>
+          )}
         </div>
       </section>
 

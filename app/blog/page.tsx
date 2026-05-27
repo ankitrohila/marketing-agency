@@ -65,6 +65,9 @@ export default function BlogPage() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [subEmail, setSubEmail] = useState("");
+  const [subState, setSubState] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [subMsg, setSubMsg] = useState("");
   const PER_PAGE = 9;
 
   useEffect(() => {
@@ -123,6 +126,31 @@ export default function BlogPage() {
       });
     });
   }, { scope: heroRef, dependencies: [filtered] });
+
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    if (!subEmail) return;
+    setSubState("loading");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: subEmail, source: "blog_page" }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubState("success");
+        setSubMsg(data.message);
+        setSubEmail("");
+      } else {
+        setSubState("error");
+        setSubMsg(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setSubState("error");
+      setSubMsg("Connection error. Please try again.");
+    }
+  }
 
   const featured = posts.find((p) => p.featured);
   const nonFeatured = filtered.filter((p) => !p.featured || activeCategory !== "All" || search);
@@ -497,28 +525,43 @@ export default function BlogPage() {
             <p style={{ color: "var(--bt-muted)", fontSize: "1.0625rem", marginBottom: 32, maxWidth: 460, margin: "0 auto 32px" }}>
               Join 2,400+ marketers who get our best frameworks, case studies, and market intelligence — every two weeks.
             </p>
-            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                style={{
-                  padding: "14px 20px",
-                  borderRadius: 99,
-                  border: "1px solid var(--bt-border)",
-                  background: "var(--bt-black)",
-                  color: "var(--bt-white)",
-                  fontSize: "0.9375rem",
-                  outline: "none",
-                  minWidth: 240,
-                }}
-              />
-              <button className="btn btn-primary">
-                Subscribe
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
+            {subState === "success" ? (
+              <div style={{ padding: "20px 28px", borderRadius: 16, background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.25)", color: "#34D399", fontWeight: 600, fontSize: "0.9375rem" }}>
+                ✓ {subMsg}
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={subEmail}
+                  onChange={(e) => setSubEmail(e.target.value)}
+                  required
+                  style={{
+                    padding: "14px 20px",
+                    borderRadius: 99,
+                    border: "1px solid var(--bt-border)",
+                    background: "var(--bt-black)",
+                    color: "var(--bt-white)",
+                    fontSize: "0.9375rem",
+                    outline: "none",
+                    minWidth: 240,
+                    fontFamily: "inherit",
+                  }}
+                />
+                <button type="submit" disabled={subState === "loading"} className="btn btn-primary" style={{ opacity: subState === "loading" ? 0.7 : 1 }}>
+                  {subState === "loading" ? "Subscribing…" : "Subscribe"}
+                  {subState !== "loading" && (
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  )}
+                </button>
+                {subState === "error" && (
+                  <p style={{ width: "100%", textAlign: "center", color: "#F87171", fontSize: "0.875rem", marginTop: 4 }}>{subMsg}</p>
+                )}
+              </form>
+            )}
           </div>
         </div>
       </section>
