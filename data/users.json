@@ -1,7 +1,53 @@
 [
-  {"id":"1","name":"Aditya Raj","email":"admin@thebrandthink.com","password":"admin123","role":"super_admin","avatar":"https://i.pravatar.cc/64?img=11","createdAt":"2024-01-01T00:00:00Z","status":"active"},
-  {"id":"2","name":"Priya Sharma","email":"priya@thebrandthink.com","password":"editor123","role":"editor","avatar":"https://i.pravatar.cc/64?img=47","createdAt":"2024-02-01T00:00:00Z","status":"active"},
-  {"id":"3","name":"Rohit Nair","email":"rohit@thebrandthink.com","password":"author123","role":"author","avatar":"https://i.pravatar.cc/64?img=33","createdAt":"2024-03-01T00:00:00Z","status":"active"},
-  {"id":"4","name":"Anjali Menon","email":"anjali@thebrandthink.com","password":"contrib123","role":"contributor","avatar":"https://i.pravatar.cc/64?img=44","createdAt":"2024-04-01T00:00:00Z","status":"active"},
-  {"id":"5","name":"Karan Mehta","email":"karan@thebrandthink.com","password":"viewer123","role":"viewer","avatar":"https://i.pravatar.cc/64?img=15","createdAt":"2024-05-01T00:00:00Z","status":"active"}
+  {
+    "id": "1",
+    "name": "Aditya Raj",
+    "email": "admin@thebrandthink.com",
+    "password": "admin123",
+    "role": "super_admin",
+    "avatar": "https://i.pravatar.cc/64?img=11",
+    "createdAt": "2024-01-01T00:00:00Z",
+    "status": "active"
+  },
+  {
+    "id": "2",
+    "name": "Priya Sharma",
+    "email": "priya@thebrandthink.com",
+    "password": "editor123",
+    "role": "editor",
+    "avatar": "https://i.pravatar.cc/64?img=47",
+    "createdAt": "2024-02-01T00:00:00Z",
+    "status": "active"
+  },
+  {
+    "id": "3",
+    "name": "Rohit Nair",
+    "email": "rohit@thebrandthink.com",
+    "password": "author123",
+    "role": "super_admin",
+    "avatar": "https://i.pravatar.cc/64?img=33",
+    "createdAt": "2024-03-01T00:00:00Z",
+    "status": "active",
+    "updatedAt": "2026-05-27T19:32:53.504Z"
+  },
+  {
+    "id": "4",
+    "name": "Anjali Menon",
+    "email": "anjali@thebrandthink.com",
+    "password": "contrib123",
+    "role": "contributor",
+    "avatar": "https://i.pravatar.cc/64?img=44",
+    "createdAt": "2024-04-01T00:00:00Z",
+    "status": "active"
+  },
+  {
+    "id": "5",
+    "name": "Karan Mehta",
+    "email": "karan@thebrandthink.com",
+    "password": "viewer123",
+    "role": "viewer",
+    "avatar": "https://i.pravatar.cc/64?img=15",
+    "createdAt": "2024-05-01T00:00:00Z",
+    "status": "active"
+  }
 ]

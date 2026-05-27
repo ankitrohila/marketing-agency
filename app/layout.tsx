@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import CustomCursor from "@/components/CustomCursor";
-import SmoothScroll from "@/components/SmoothScroll";
-import ThemeToggle from "@/components/ThemeToggle";
+import ClientLayout from "@/components/ClientLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,12 +31,7 @@ export default function RootLayout({
         style={{ backgroundColor: "var(--bt-black)", color: "var(--bt-white)" }}
         suppressHydrationWarning
       >
-        <CustomCursor />
-        <ThemeToggle />
-        <SmoothScroll>
-          <Navbar />
-          <main>{children}</main>
-        </SmoothScroll>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
