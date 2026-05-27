@@ -1,0 +1,13 @@
+{
+  "contacts": [
+    {
+      "id": "1779776587730",
+      "name": "Test User",
+      "email": "test@test.com",
+      "company": "",
+      "budget": "",
+      "message": "Hello BrandThink!",
+      "createdAt": "2026-05-26T06:23:07.730Z"
+    }
+  ]
+}
