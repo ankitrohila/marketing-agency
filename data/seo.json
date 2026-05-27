@@ -1,0 +1,25 @@
+{
+  "global": {
+    "siteName": "BrandThink",
+    "siteUrl": "https://thebrandthink.com",
+    "defaultTitle": "BrandThink — MarTech & Creative Agency",
+    "defaultDescription": "We build growth infrastructure — demand generation, distribution systems, and conversion engines.",
+    "defaultOgImage": "/logo.png",
+    "googleTagId": "",
+    "googleSearchConsoleVerification": "",
+    "facebookPixelId": "",
+    "robotsTxt": "User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: https://thebrandthink.com/sitemap.xml",
+    "schemaOrg": "{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"BrandThink\",\"url\":\"https://thebrandthink.com\",\"logo\":\"https://thebrandthink.com/logo.png\",\"contactPoint\":{\"@type\":\"ContactPoint\",\"telephone\":\"+91-9571361543\",\"contactType\":\"customer service\"}}",
+    "canonicalUrl": ""
+  },
+  "pages": {
+    "/": {"title":"BrandThink — Growth Infrastructure Agency","description":"We build demand generation, distribution systems, and conversion engines for ambitious brands.","ogImage":""},
+    "/about": {"title":"About BrandThink — Our Team & Story","description":"Meet the BrandThink team — a group of performance marketers, brand strategists, and creative technologists building growth infrastructure.","ogImage":""},
+    "/services": {"title":"Services — BrandThink","description":"Brand strategy, performance marketing, creative production, media distribution, and AI-powered MarTech — all under one roof.","ogImage":""},
+    "/work": {"title":"Our Work — BrandThink","description":"Case studies and results from the brands we've helped grow. Real numbers, real stories.","ogImage":""},
+    "/insights": {"title":"Insights — BrandThink","description":"Strategy frameworks, case studies, and market intelligence from the BrandThink team.","ogImage":""},
+    "/blog": {"title":"Blog — BrandThink","description":"Fresh thinking on performance marketing, brand strategy, AI, and growth from the BrandThink team.","ogImage":""},
+    "/contact": {"title":"Contact BrandThink — Start a Project","description":"Ready to build something that grows? Let's talk about your brand, your goals, and how we can help.","ogImage":""}
+  },
+  "redirects": []
+}

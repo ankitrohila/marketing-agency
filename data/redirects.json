@@ -1,0 +1,4 @@
+[
+  {"id":"1","from":"/old-blog","to":"/blog","type":"301","active":true,"createdAt":"2025-01-01T00:00:00Z"},
+  {"id":"2","from":"/services/branding","to":"/services/brand-strategy","type":"301","active":true,"createdAt":"2025-01-01T00:00:00Z"}
+]

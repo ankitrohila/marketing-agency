@@ -6,6 +6,7 @@ import Services        from "@/components/sections/Services";
 import Metrics         from "@/components/sections/Metrics";
 import Brands          from "@/components/sections/Brands";
 import GridImages      from "@/components/sections/GridImages";
+import BlogSection     from "@/components/sections/BlogSection";
 import Footer          from "@/components/sections/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Metrics />
       <Brands />
       <GridImages />
+      <BlogSection />
       <Footer />
     </>
   );

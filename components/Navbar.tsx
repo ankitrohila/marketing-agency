@@ -16,6 +16,7 @@ const LINKS = [
     ],
   },
   { label: "Work",     href: "/work" },
+  { label: "Blog",     href: "/blog" },
   { label: "Insights", href: "/insights" },
   { label: "About",    href: "/about" },
   { label: "Contact",  href: "/contact" },

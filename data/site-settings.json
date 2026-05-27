@@ -1,0 +1,18 @@
+{
+  "siteName": "BrandThink",
+  "tagline": "Your Brand Our Mind",
+  "email": "adityaraj@thebrandthink.com",
+  "phone": "+91-9571361543",
+  "address": "Bangalore, India",
+  "socialLinks": {
+    "linkedin": "https://linkedin.com/company/thebrandthink",
+    "instagram": "https://instagram.com/thebrandthink",
+    "twitter": "https://twitter.com/thebrandthink"
+  },
+  "maintenanceMode": false,
+  "allowComments": true,
+  "postsPerPage": 9,
+  "timezone": "Asia/Kolkata",
+  "language": "en-IN",
+  "currency": "INR"
+}
