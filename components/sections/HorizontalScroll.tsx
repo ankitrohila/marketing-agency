@@ -68,78 +68,92 @@ export default function HorizontalScroll() {
   ) => (
     <div
       ref={ref}
-      style={{ display: "flex", gap: 16, width: "max-content", willChange: "transform" }}
+      style={{
+        display: "flex",
+        gap: 16,
+        width: "max-content",
+        willChange: "transform",
+        /* No transform here — GSAP owns this element's transform */
+      }}
     >
       {[...items, ...items].map((item, i) => (
+        /* Outer: pointer target — NO transform applied here */
         <div
           key={i}
+          className="hs-card-outer"
           style={{
             flexShrink: 0,
             width: 220,
             height: 310,
-            borderRadius: 18,
-            overflow: "hidden",
-            border: "1px solid rgba(255,255,255,0.08)",
-            position: "relative",
-            boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
-            transition: "transform 0.4s, box-shadow 0.4s",
             cursor: "pointer",
           }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.transform = "scale(1.04) translateY(-6px)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 24px 60px rgba(0,0,0,0.7)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.transform = "scale(1) translateY(0)";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 40px rgba(0,0,0,0.5)";
-          }}
         >
-          <img
-            src={item.img}
-            alt={item.label}
+          {/* Inner: the visible card — ONLY this element transforms on hover */}
+          <div
+            className="hs-card-inner"
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              display: "block",
-            }}
-            loading="lazy"
-          />
-          {/* Gradient overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(to bottom, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.85) 100%)",
-            }}
-          />
-          {/* Label */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 16,
-              left: 16,
-              right: 16,
+              borderRadius: 18,
+              overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.08)",
+              position: "relative",
+              boxShadow: "0 12px 40px rgba(0,0,0,0.5)",
+              /* backface & translate3d force own GPU compositing layer */
+              transform: "translate3d(0,0,0)",
+              backfaceVisibility: "hidden",
             }}
           >
-            <span
+            <img
+              src={item.img}
+              alt={item.label}
               style={{
-                display: "inline-block",
-                fontSize: "0.6875rem",
-                fontWeight: 700,
-                color: "#ffffff",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                padding: "4px 10px",
-                borderRadius: 99,
-                background: "rgba(0,0,0,0.5)",
-                backdropFilter: "blur(6px)",
-                border: "1px solid rgba(255,255,255,0.15)",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+                pointerEvents: "none",
+              }}
+              loading="lazy"
+              draggable={false}
+            />
+            {/* Gradient overlay */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.85) 100%)",
+                pointerEvents: "none",
+              }}
+            />
+            {/* Label */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 16,
+                left: 16,
+                right: 16,
+                pointerEvents: "none",
               }}
             >
-              {item.label}
-            </span>
+              <span
+                style={{
+                  display: "inline-block",
+                  fontSize: "0.6875rem",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  padding: "4px 10px",
+                  borderRadius: 99,
+                  background: "rgba(0,0,0,0.5)",
+                  backdropFilter: "blur(6px)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
+              >
+                {item.label}
+              </span>
+            </div>
           </div>
         </div>
       ))}
@@ -147,48 +161,58 @@ export default function HorizontalScroll() {
   );
 
   return (
-    <section
-      ref={sectionRef}
-      style={{ background: "var(--bt-black)", overflow: "hidden" }}
-      aria-label="Capabilities"
-    >
-      {/* Header */}
-      <div
-        className="section-sm"
-        style={{ paddingBottom: 64 }}
-      >
-        <div className="container">
-          <span className="chip" style={{ marginBottom: 16 }}>
-            Full Spectrum
-          </span>
-          <h2 className="heading-lg">
-            The Full Growth
-            <br />
-            <span
-              style={{
-                background: "linear-gradient(135deg,#E8312A,#FF8C19)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Infrastructure Stack.
-            </span>
-          </h2>
-        </div>
-      </div>
+    <>
+      {/* CSS: hover lives here, completely isolated from GSAP's inline transform */}
+      <style>{`
+        .hs-card-inner {
+          transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                      box-shadow 0.38s ease;
+          will-change: transform;
+        }
+        .hs-card-outer:hover .hs-card-inner {
+          transform: translate3d(0, -8px, 0) scale(1.04) !important;
+          box-shadow: 0 28px 64px rgba(0,0,0,0.72);
+        }
+      `}</style>
 
-      {/* Diagonal carousel band */}
-      <div
-        style={{
-          padding: "80px 0 120px",
-          transform: "rotate(-7deg) scaleX(1.18)",
-          transformOrigin: "50% 50%",
-          overflow: "hidden",
-        }}
+      <section
+        ref={sectionRef}
+        style={{ background: "var(--bt-black)", overflow: "hidden" }}
+        aria-label="Capabilities"
       >
-        <div style={{ marginBottom: 20 }}>{renderRow(ROW1, row1Ref)}</div>
-        <div>{renderRow(ROW2, row2Ref)}</div>
-      </div>
-    </section>
+        {/* Header */}
+        <div className="section-sm" style={{ paddingBottom: 64 }}>
+          <div className="container">
+            <span className="chip" style={{ marginBottom: 16 }}>Full Spectrum</span>
+            <h2 className="heading-lg">
+              The Full Growth
+              <br />
+              <span
+                style={{
+                  background: "linear-gradient(135deg,#E8312A,#FF8C19)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Infrastructure Stack.
+              </span>
+            </h2>
+          </div>
+        </div>
+
+        {/* Diagonal carousel band */}
+        <div
+          style={{
+            padding: "80px 0 120px",
+            transform: "rotate(-7deg) scaleX(1.18)",
+            transformOrigin: "50% 50%",
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ marginBottom: 20 }}>{renderRow(ROW1, row1Ref)}</div>
+          <div>{renderRow(ROW2, row2Ref)}</div>
+        </div>
+      </section>
+    </>
   );
 }
