@@ -120,7 +120,7 @@ export default function BackupPage() {
   }
 
   return (
-    <div style={{ padding: 32, minHeight: "100vh" }}>
+    <div className="adm-page-main" style={{ padding: 32, minHeight: "100vh" }}>
       {/* Toast */}
       {toast && (
         <div style={{
@@ -137,10 +137,10 @@ export default function BackupPage() {
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
         <div>
-          <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F5F5F5", letterSpacing: "-0.03em" }}>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "var(--adm-text)", letterSpacing: "-0.03em" }}>
             Backup &amp; Changelog
           </h1>
-          <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
+          <p style={{ fontSize: "0.875rem", color: "var(--adm-muted)", marginTop: 4 }}>
             Create full data backups and track all site changes
           </p>
         </div>
@@ -164,24 +164,24 @@ export default function BackupPage() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: 80, color: "rgba(255,255,255,0.3)" }}>Loading…</div>
+        <div style={{ textAlign: "center", padding: 80, color: "var(--adm-muted)" }}>Loading…</div>
       ) : (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
 
           {/* Left: Data files + Backups */}
           <div>
             {/* Data Files */}
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: 24, marginBottom: 20 }}>
-              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 16 }}>
+            <div style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 16, padding: 24, marginBottom: 20 }}>
+              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 16 }}>
                 Data Files ({files.length})
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {files.map((file) => (
-                  <div key={file.name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 8, background: "#141414" }}>
+                  <div key={file.name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 8, background: "var(--adm-card)" }}>
                     <span style={{ fontSize: "1rem" }}>📄</span>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#F5F5F5" }}>{file.name}</div>
-                      <div style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.35)" }}>
+                      <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--adm-text)" }}>{file.name}</div>
+                      <div style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>
                         {fmtSize(file.size)} · Modified {fmt(file.modified)}
                       </div>
                     </div>
@@ -194,24 +194,24 @@ export default function BackupPage() {
             </div>
 
             {/* Backup History */}
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: 24 }}>
-              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 16 }}>
+            <div style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 16, padding: 24 }}>
+              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 16 }}>
                 Backup History ({backups.length})
               </h2>
               {backups.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "32px 0", color: "rgba(255,255,255,0.3)", fontSize: "0.875rem" }}>
+                <div style={{ textAlign: "center", padding: "32px 0", color: "var(--adm-muted)", fontSize: "0.875rem" }}>
                   No backups yet. Click "Create Backup Now" above.
                 </div>
               ) : (
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   {backups.slice().reverse().map((backup) => (
-                    <div key={backup.name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 8, background: "#141414" }}>
+                    <div key={backup.name} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderRadius: 8, background: "var(--adm-card)" }}>
                       <span style={{ fontSize: "1rem" }}>💾</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "#F5F5F5", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <div style={{ fontSize: "0.8125rem", fontWeight: 600, color: "var(--adm-text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {backup.name}
                         </div>
-                        <div style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.35)" }}>
+                        <div style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>
                           {fmtSize(backup.size)} · {fmt(backup.created)}
                         </div>
                       </div>
@@ -228,19 +228,19 @@ export default function BackupPage() {
           {/* Right: Changelog */}
           <div>
             {/* Add entry form */}
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: 24, marginBottom: 20 }}>
-              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 16 }}>
+            <div style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 16, padding: 24, marginBottom: 20 }}>
+              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 16 }}>
                 Add Changelog Entry
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+                  <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
                     Type
                   </label>
                   <select
                     value={logType}
                     onChange={(e) => setLogType(e.target.value as ChangelogEntry["type"])}
-                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)", color: "#F5F5F5", fontSize: "0.875rem", outline: "none" }}
+                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", color: "var(--adm-text)", fontSize: "0.875rem", outline: "none" }}
                   >
                     <option value="note">📝 Note</option>
                     <option value="feature">✨ Feature</option>
@@ -250,7 +250,7 @@ export default function BackupPage() {
                   </select>
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
+                  <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 6 }}>
                     Message
                   </label>
                   <textarea
@@ -258,7 +258,7 @@ export default function BackupPage() {
                     onChange={(e) => setLogMsg(e.target.value)}
                     placeholder="Describe what changed..."
                     rows={3}
-                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.1)", color: "#F5F5F5", fontSize: "0.875rem", outline: "none", fontFamily: "inherit", resize: "vertical" }}
+                    style={{ width: "100%", padding: "10px 12px", borderRadius: 8, background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", color: "var(--adm-text)", fontSize: "0.875rem", outline: "none", fontFamily: "inherit", resize: "vertical" }}
                   />
                 </div>
                 <button
@@ -280,12 +280,12 @@ export default function BackupPage() {
             </div>
 
             {/* Changelog list */}
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 16, padding: 24 }}>
-              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 16 }}>
+            <div style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 16, padding: 24 }}>
+              <h2 style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 16 }}>
                 Changelog ({changelog.length} entries)
               </h2>
               {changelog.length === 0 ? (
-                <div style={{ textAlign: "center", padding: "32px 0", color: "rgba(255,255,255,0.3)", fontSize: "0.875rem" }}>
+                <div style={{ textAlign: "center", padding: "32px 0", color: "var(--adm-muted)", fontSize: "0.875rem" }}>
                   No changelog entries yet. Backups and manual entries appear here.
                 </div>
               ) : (
@@ -316,7 +316,7 @@ export default function BackupPage() {
                           }}>
                             {entry.type}
                           </span>
-                          <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>
+                          <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>
                             {fmt(entry.timestamp)}
                           </span>
                         </div>

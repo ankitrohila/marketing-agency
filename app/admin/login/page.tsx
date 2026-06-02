@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
         <div style={{ fontSize: "1.75rem", fontWeight: 900, color: "#E8312A", letterSpacing: "-0.04em", marginBottom: 6 }}>
           BrandThink
         </div>
-        <div style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}>Admin Portal</div>
+        <div style={{ fontSize: "0.8125rem", color: "var(--adm-muted)" }}>Admin Portal</div>
       </div>
 
       {/* Card */}
@@ -64,17 +64,17 @@ export default function AdminLoginPage() {
         style={{
           width: "100%",
           maxWidth: 420,
-          background: "#141414",
+          background: "var(--adm-card)",
           border: "1px solid rgba(255,255,255,0.07)",
           borderRadius: 20,
           padding: "36px 32px",
           boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
         }}
       >
-        <h1 style={{ fontSize: "1.375rem", fontWeight: 800, color: "#F5F5F5", marginBottom: 8, letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontSize: "1.375rem", fontWeight: 800, color: "var(--adm-text)", marginBottom: 8, letterSpacing: "-0.03em" }}>
           Sign in to your account
         </h1>
-        <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.4)", marginBottom: 32 }}>
+        <p style={{ fontSize: "0.875rem", color: "var(--adm-muted)", marginBottom: 32 }}>
           Manage your content, SEO, and site settings.
         </p>
 
@@ -96,7 +96,7 @@ export default function AdminLoginPage() {
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "rgba(255,255,255,0.6)", marginBottom: 8 }}>
+            <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--adm-muted2)", marginBottom: 8 }}>
               Email address
             </label>
             <input
@@ -108,10 +108,10 @@ export default function AdminLoginPage() {
               style={{
                 width: "100%",
                 padding: "12px 16px",
-                background: "#1a1a1a",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--adm-card2)",
+                border: "1px solid var(--adm-border2)",
                 borderRadius: 10,
-                color: "#F5F5F5",
+                color: "var(--adm-text)",
                 fontSize: "0.9375rem",
                 outline: "none",
                 transition: "border-color 0.2s",
@@ -122,7 +122,7 @@ export default function AdminLoginPage() {
           </div>
 
           <div style={{ marginBottom: 28 }}>
-            <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "rgba(255,255,255,0.6)", marginBottom: 8 }}>
+            <label style={{ display: "block", fontSize: "0.8125rem", fontWeight: 600, color: "var(--adm-muted2)", marginBottom: 8 }}>
               Password
             </label>
             <input
@@ -134,10 +134,10 @@ export default function AdminLoginPage() {
               style={{
                 width: "100%",
                 padding: "12px 16px",
-                background: "#1a1a1a",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--adm-card2)",
+                border: "1px solid var(--adm-border2)",
                 borderRadius: 10,
-                color: "#F5F5F5",
+                color: "var(--adm-text)",
                 fontSize: "0.9375rem",
                 outline: "none",
                 transition: "border-color 0.2s",
@@ -173,11 +173,11 @@ export default function AdminLoginPage() {
             marginTop: 28,
             padding: "16px",
             background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.06)",
+            border: "1px solid var(--adm-border)",
             borderRadius: 10,
           }}
         >
-          <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
+          <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>
             Demo Credentials
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -195,7 +195,7 @@ export default function AdminLoginPage() {
                   justifyContent: "space-between",
                   padding: "8px 10px",
                   background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  border: "1px solid var(--adm-border)",
                   borderRadius: 6,
                   cursor: "pointer",
                   transition: "background 0.15s",
@@ -203,16 +203,16 @@ export default function AdminLoginPage() {
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)")}
               >
-                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "rgba(255,255,255,0.5)" }}>{cred.role}</span>
-                <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>{cred.email}</span>
+                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--adm-muted2)" }}>{cred.role}</span>
+                <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>{cred.email}</span>
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      <div style={{ marginTop: 24, fontSize: "0.8125rem", color: "rgba(255,255,255,0.3)" }}>
-        <Link href="/" style={{ color: "rgba(255,255,255,0.3)", textDecoration: "none" }}>
+      <div style={{ marginTop: 24, fontSize: "0.8125rem", color: "var(--adm-muted)" }}>
+        <Link href="/" style={{ color: "var(--adm-muted)", textDecoration: "none" }}>
           ← Back to BrandThink
         </Link>
       </div>

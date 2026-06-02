@@ -27,7 +27,7 @@ const TIMELINE = [
 ];
 
 const TEAM = [
-  { name: "Aditya Raj",    role: "Founder & CEO",          img: "https://i.pravatar.cc/300?img=11", bg: "#1a0808" },
+  { name: "Ankit Rohilla", role: "Founder & CEO",          img: "https://i.pravatar.cc/300?img=68", bg: "#1a0808" },
   { name: "Priya Sharma",  role: "Chief Creative Officer",  img: "https://i.pravatar.cc/300?img=47", bg: "#1a0f2f" },
   { name: "Rohit Nair",    role: "Head of Performance",     img: "https://i.pravatar.cc/300?img=33", bg: "#0f1f2f" },
   { name: "Anjali Menon",  role: "Head of Strategy",        img: "https://i.pravatar.cc/300?img=44", bg: "#2f1a0f" },

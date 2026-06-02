@@ -1,8 +1,8 @@
 "use client";
 
 const SECTION_STYLE: React.CSSProperties = {
-  background: "#0d0d0d",
-  border: "1px solid rgba(255,255,255,0.06)",
+  background: "var(--adm-surface)",
+  border: "1px solid var(--adm-border)",
   borderRadius: 16,
   padding: "28px 28px",
   marginBottom: 20,
@@ -10,7 +10,7 @@ const SECTION_STYLE: React.CSSProperties = {
 
 const CODE_STYLE: React.CSSProperties = {
   background: "#060606",
-  border: "1px solid rgba(255,255,255,0.08)",
+  border: "1px solid var(--adm-border2)",
   borderRadius: 10,
   padding: "16px 20px",
   fontFamily: "monospace",
@@ -25,7 +25,7 @@ const CODE_STYLE: React.CSSProperties = {
 const H2_STYLE: React.CSSProperties = {
   fontSize: "1rem",
   fontWeight: 700,
-  color: "#F5F5F5",
+  color: "var(--adm-text)",
   marginBottom: 12,
   display: "flex",
   alignItems: "center",
@@ -34,14 +34,14 @@ const H2_STYLE: React.CSSProperties = {
 
 const P_STYLE: React.CSSProperties = {
   fontSize: "0.875rem",
-  color: "rgba(255,255,255,0.6)",
+  color: "var(--adm-muted2)",
   lineHeight: 1.7,
   marginBottom: 8,
 };
 
 const LI_STYLE: React.CSSProperties = {
   fontSize: "0.875rem",
-  color: "rgba(255,255,255,0.6)",
+  color: "var(--adm-muted2)",
   lineHeight: 1.7,
   marginBottom: 6,
   paddingLeft: 16,
@@ -50,13 +50,13 @@ const LI_STYLE: React.CSSProperties = {
 
 export default function DatabaseGuidePage() {
   return (
-    <div style={{ padding: 32, maxWidth: 900, minHeight: "100vh" }}>
+    <div className="adm-page-main" style={{ padding: 32, maxWidth: 900, minHeight: "100vh" }}>
       {/* Header */}
       <div style={{ marginBottom: 32 }}>
-        <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F5F5F5", letterSpacing: "-0.03em", marginBottom: 8 }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "var(--adm-text)", letterSpacing: "-0.03em", marginBottom: 8 }}>
           MySQL + phpMyAdmin Setup Guide
         </h1>
-        <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
+        <p style={{ fontSize: "0.9375rem", color: "var(--adm-muted)", lineHeight: 1.7 }}>
           Complete guide to set up MySQL on localhost and connect BrandThink to a real database
         </p>
       </div>
@@ -65,7 +65,7 @@ export default function DatabaseGuidePage() {
       <div style={{ ...SECTION_STYLE, background: "rgba(52,211,153,0.05)", border: "1px solid rgba(52,211,153,0.15)" }}>
         <h2 style={{ ...H2_STYLE, color: "#34D399" }}>📦 Current Setup (JSON Files)</h2>
         <p style={P_STYLE}>
-          BrandThink currently uses JSON files stored in <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "#F5F5F5" }}>/data/</code> for all data storage. This works great for development and small deployments.
+          BrandThink currently uses JSON files stored in <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "var(--adm-text)" }}>/data/</code> for all data storage. This works great for development and small deployments.
         </p>
         <p style={P_STYLE}>
           For production with MySQL, follow the steps below. The app is designed to switch data layers with minimal code changes.
@@ -244,14 +244,14 @@ CREATE TABLE form_submissions (
         <p style={P_STYLE}>Install the MySQL client for Node.js:</p>
         <div style={CODE_STYLE}>{`npm install mysql2`}</div>
 
-        <p style={{ ...P_STYLE, marginTop: 16 }}>Update your <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "#F5F5F5" }}>.env.local</code>:</p>
+        <p style={{ ...P_STYLE, marginTop: 16 }}>Update your <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "var(--adm-text)" }}>.env.local</code>:</p>
         <div style={CODE_STYLE}>{`DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASS=your_root_password
 DB_NAME=brandthink`}</div>
 
-        <p style={{ ...P_STYLE, marginTop: 16 }}>Create <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "#F5F5F5" }}>lib/db.ts</code>:</p>
+        <p style={{ ...P_STYLE, marginTop: 16 }}>Create <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "var(--adm-text)" }}>lib/db.ts</code>:</p>
         <div style={CODE_STYLE}>{`import mysql from 'mysql2/promise';
 
 const pool = mysql.createPool({
@@ -320,7 +320,7 @@ async function migrate() {
 }
 
 migrate().catch(console.error);`}</div>
-        <p style={{ ...P_STYLE, marginTop: 12 }}>Run with: <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "#F5F5F5" }}>node scripts/migrate-to-mysql.js</code></p>
+        <p style={{ ...P_STYLE, marginTop: 12 }}>Run with: <code style={{ background: "rgba(255,255,255,0.08)", padding: "1px 6px", borderRadius: 4, fontSize: "0.8125rem", color: "var(--adm-text)" }}>node scripts/migrate-to-mysql.js</code></p>
       </div>
 
       {/* phpMyAdmin Tips */}
@@ -338,9 +338,9 @@ migrate().catch(console.error);`}</div>
             ["Search records", "Search tab → enter criteria"],
             ["Edit a record", "Click pencil icon on any row"],
           ].map(([action, howto]) => (
-            <div key={action as string} style={{ padding: "12px 16px", background: "#141414", borderRadius: 8 }}>
+            <div key={action as string} style={{ padding: "12px 16px", background: "var(--adm-card)", borderRadius: 8 }}>
               <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#E8312A", marginBottom: 4 }}>{action}</div>
-              <div style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.6)" }}>{howto}</div>
+              <div style={{ fontSize: "0.8125rem", color: "var(--adm-muted2)" }}>{howto}</div>
             </div>
           ))}
         </div>
@@ -360,7 +360,7 @@ migrate().catch(console.error);`}</div>
             ["Supabase", "Postgres (not MySQL) but excellent free tier"],
           ].map(([name, desc]) => (
             <li key={name as string} style={LI_STYLE}>
-              <strong style={{ color: "#F5F5F5" }}>{name}</strong> — {desc}
+              <strong style={{ color: "var(--adm-text)" }}>{name}</strong> — {desc}
             </li>
           ))}
         </ul>

@@ -57,7 +57,7 @@ function FileTreeNode({ entry, depth, onSelect, selectedPath }: {
             border: "none",
             cursor: "pointer",
             padding: `6px 8px 6px ${12 + depth * 14}px`,
-            color: "rgba(255,255,255,0.55)",
+            color: "var(--adm-muted2)",
             fontSize: "0.8125rem",
             fontWeight: 500,
             textAlign: "left",
@@ -215,8 +215,8 @@ export default function AdminFilesPage() {
           style={{
             width: 280,
             flexShrink: 0,
-            background: "#0d0d0d",
-            borderRight: "1px solid rgba(255,255,255,0.06)",
+            background: "var(--adm-surface)",
+            borderRight: "1px solid var(--adm-border)",
             overflowY: "auto",
             padding: "12px 8px",
           }}
@@ -243,13 +243,13 @@ export default function AdminFilesPage() {
         {/* Right panel: Editor */}
         <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
           {/* Editor header */}
-          <div style={{ padding: "10px 20px", background: "#0d0d0d", borderBottom: "1px solid rgba(255,255,255,0.06)", display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+          <div style={{ padding: "10px 20px", background: "var(--adm-surface)", borderBottom: "1px solid var(--adm-border)", display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
             {selectedPath ? (
               <>
-                <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+                <span style={{ fontSize: "0.75rem", color: "var(--adm-muted)", fontFamily: "monospace" }}>
                   {selectedPath.split(/[\\/]/).join(" / ")}
                 </span>
-                <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgba(255,255,255,0.06)", fontSize: "0.6875rem", fontWeight: 600, color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
+                <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgba(255,255,255,0.06)", fontSize: "0.6875rem", fontWeight: 600, color: "var(--adm-muted)", textTransform: "uppercase" }}>
                   {language}
                 </span>
                 {readOnly && <span style={{ padding: "2px 8px", borderRadius: 4, background: "rgba(232,49,42,0.1)", fontSize: "0.6875rem", fontWeight: 600, color: "#E8312A" }}>Protected</span>}
@@ -273,7 +273,7 @@ export default function AdminFilesPage() {
           {/* Code area */}
           <div style={{ flex: 1, overflow: "hidden", position: "relative" }}>
             {loading ? (
-              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.3)" }}>Loading file...</div>
+              <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--adm-muted)" }}>Loading file...</div>
             ) : (
               <textarea
                 value={fileContent}
@@ -285,7 +285,7 @@ export default function AdminFilesPage() {
                   height: "100%",
                   background: "#111111",
                   border: "none",
-                  color: "#F5F5F5",
+                  color: "var(--adm-text)",
                   fontSize: "0.8125rem",
                   lineHeight: 1.7,
                   padding: "20px 24px",
@@ -300,11 +300,11 @@ export default function AdminFilesPage() {
           </div>
 
           {/* Status bar */}
-          <div style={{ padding: "6px 20px", background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.06)", display: "flex", gap: 20, flexShrink: 0 }}>
-            <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>{filename || "No file selected"}</span>
-            {fileInfo?.size && <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>{formatSize(fileInfo.size)}</span>}
-            {fileInfo?.modified && <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>Modified: {new Date(fileInfo.modified).toLocaleString("en-IN")}</span>}
-            <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)", marginLeft: "auto" }}>UTF-8</span>
+          <div style={{ padding: "6px 20px", background: "var(--adm-surface)", borderTop: "1px solid var(--adm-border)", display: "flex", gap: 20, flexShrink: 0 }}>
+            <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>{filename || "No file selected"}</span>
+            {fileInfo?.size && <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>{formatSize(fileInfo.size)}</span>}
+            {fileInfo?.modified && <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>Modified: {new Date(fileInfo.modified).toLocaleString("en-IN")}</span>}
+            <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)", marginLeft: "auto" }}>UTF-8</span>
           </div>
         </div>
       </div>

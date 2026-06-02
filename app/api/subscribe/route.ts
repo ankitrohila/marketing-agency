@@ -47,9 +47,10 @@ export async function POST(req: NextRequest) {
 
     // Send confirmation email (non-blocking)
     sendMail({
-      to: email.toLowerCase().trim(),
+      to:      email.toLowerCase().trim(),
       subject: "Welcome to BrandThink Insights 🎉",
-      html: subscribeConfirmHtml(email.toLowerCase().trim()),
+      html:    subscribeConfirmHtml(email.toLowerCase().trim()),
+      source:  "subscribe",
     }).catch(console.error);
 
     return NextResponse.json({

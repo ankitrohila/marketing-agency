@@ -92,13 +92,13 @@ export default function SubscribersPage() {
   ];
 
   return (
-    <div style={{ padding: 32, minHeight: "100vh" }}>
+    <div className="adm-page-main" style={{ padding: 32, minHeight: "100vh" }}>
       {/* Contact detail modal */}
       {selected && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: 20 }}>
-          <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 32, width: "100%", maxWidth: 520, position: "relative" }}>
-            <button onClick={() => setSelected(null)} style={{ position: "absolute", top: 16, right: 16, background: "none", border: "none", color: "rgba(255,255,255,0.4)", cursor: "pointer", fontSize: "1.25rem" }}>✕</button>
-            <h2 style={{ fontSize: "1.125rem", fontWeight: 800, color: "#F5F5F5", marginBottom: 20 }}>{selected.name}</h2>
+          <div style={{ background: "var(--adm-surface)", border: "1px solid var(--adm-border2)", borderRadius: 20, padding: 32, width: "100%", maxWidth: 520, position: "relative" }}>
+            <button onClick={() => setSelected(null)} style={{ position: "absolute", top: 16, right: 16, background: "none", border: "none", color: "var(--adm-muted)", cursor: "pointer", fontSize: "1.25rem" }}>✕</button>
+            <h2 style={{ fontSize: "1.125rem", fontWeight: 800, color: "var(--adm-text)", marginBottom: 20 }}>{selected.name}</h2>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 20 }}>
               {[
                 ["Email", selected.email],
@@ -107,14 +107,14 @@ export default function SubscribersPage() {
                 ["Received", fmt(selected.createdAt)],
               ].map(([l, v]) => (
                 <div key={l as string}>
-                  <div style={{ fontSize: "0.625rem", fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 3 }}>{l}</div>
-                  <div style={{ fontSize: "0.875rem", color: "#F5F5F5" }}>{v}</div>
+                  <div style={{ fontSize: "0.625rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 3 }}>{l}</div>
+                  <div style={{ fontSize: "0.875rem", color: "var(--adm-text)" }}>{v}</div>
                 </div>
               ))}
             </div>
             {selected.message && (
               <div>
-                <div style={{ fontSize: "0.625rem", fontWeight: 700, color: "rgba(255,255,255,0.35)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>Message</div>
+                <div style={{ fontSize: "0.625rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>Message</div>
                 <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.75)", lineHeight: 1.65, margin: 0 }}>{selected.message}</p>
               </div>
             )}
@@ -122,7 +122,7 @@ export default function SubscribersPage() {
               <a href={`mailto:${selected.email}`} style={{ padding: "9px 18px", borderRadius: 9, background: "linear-gradient(135deg,#E8312A,#FF6B1A)", color: "#fff", fontSize: "0.8125rem", fontWeight: 700, textDecoration: "none" }}>
                 ✉ Reply
               </a>
-              <button onClick={() => setSelected(null)} style={{ padding: "9px 18px", borderRadius: 9, border: "1px solid rgba(255,255,255,0.1)", background: "transparent", color: "rgba(255,255,255,0.5)", cursor: "pointer", fontSize: "0.8125rem" }}>Close</button>
+              <button onClick={() => setSelected(null)} style={{ padding: "9px 18px", borderRadius: 9, border: "1px solid var(--adm-border2)", background: "transparent", color: "var(--adm-muted2)", cursor: "pointer", fontSize: "0.8125rem" }}>Close</button>
             </div>
           </div>
         </div>
@@ -130,10 +130,10 @@ export default function SubscribersPage() {
 
       {/* Header */}
       <div style={{ marginBottom: 28 }}>
-        <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F5F5F5", letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 800, color: "var(--adm-text)", letterSpacing: "-0.03em" }}>
           Inbox &amp; Subscribers
         </h1>
-        <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
+        <p style={{ fontSize: "0.875rem", color: "var(--adm-muted)", marginTop: 4 }}>
           All contact messages, subscribers, and form submissions in one place
         </p>
       </div>
@@ -164,7 +164,7 @@ export default function SubscribersPage() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: "center", padding: 80, color: "rgba(255,255,255,0.3)" }}>Loading…</div>
+        <div style={{ textAlign: "center", padding: 80, color: "var(--adm-muted)" }}>Loading…</div>
       ) : (
         <>
           {/* SUBSCRIBERS */}
@@ -174,16 +174,16 @@ export default function SubscribersPage() {
             ) : (
               <div>
                 {/* Export hint */}
-                <div style={{ marginBottom: 16, fontSize: "0.8125rem", color: "rgba(255,255,255,0.35)" }}>
+                <div style={{ marginBottom: 16, fontSize: "0.8125rem", color: "var(--adm-muted)" }}>
                   {subscribers.filter((s) => s.status === "active").length} active subscribers
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {subscribers.map((sub) => (
-                    <div key={sub.id} style={{ padding: "14px 18px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, display: "flex", alignItems: "center", gap: 12 }}>
+                    <div key={sub.id} style={{ padding: "14px 18px", background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 10, display: "flex", alignItems: "center", gap: 12 }}>
                       <div style={{ width: 8, height: 8, borderRadius: "50%", background: sub.status === "active" ? "#34D399" : "#F87171", flexShrink: 0 }} />
-                      <span style={{ flex: 1, fontSize: "0.875rem", color: "#F5F5F5", fontWeight: 500 }}>{sub.email}</span>
-                      <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.05)", padding: "2px 8px", borderRadius: 99 }}>{sub.source}</span>
-                      <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)", flexShrink: 0 }}>{fmt(sub.subscribedAt)}</span>
+                      <span style={{ flex: 1, fontSize: "0.875rem", color: "var(--adm-text)", fontWeight: 500 }}>{sub.email}</span>
+                      <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)", background: "rgba(255,255,255,0.05)", padding: "2px 8px", borderRadius: 99 }}>{sub.source}</span>
+                      <span style={{ fontSize: "0.75rem", color: "var(--adm-muted)", flexShrink: 0 }}>{fmt(sub.subscribedAt)}</span>
                     </div>
                   ))}
                 </div>
@@ -199,7 +199,7 @@ export default function SubscribersPage() {
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {contacts.map((contact) => (
                   <div key={contact.id} onClick={() => setSelected(contact)}
-                    style={{ padding: "16px 20px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 14, transition: "background 0.2s" }}
+                    style={{ padding: "16px 20px", background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 12, cursor: "pointer", display: "flex", alignItems: "center", gap: 14, transition: "background 0.2s" }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#141414"; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#0d0d0d"; }}
                   >
@@ -207,12 +207,12 @@ export default function SubscribersPage() {
                       {contact.name.charAt(0).toUpperCase()}
                     </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#F5F5F5" }}>{contact.name}</div>
-                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: 2 }}>
+                      <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--adm-text)" }}>{contact.name}</div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--adm-muted)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", marginTop: 2 }}>
                         {contact.email}{contact.company ? ` · ${contact.company}` : ""}
                       </div>
                     </div>
-                    <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)", flexShrink: 0 }}>{fmt(contact.createdAt)}</span>
+                    <span style={{ fontSize: "0.75rem", color: "var(--adm-muted)", flexShrink: 0 }}>{fmt(contact.createdAt)}</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="2" style={{ flexShrink: 0 }}>
                       <path d="M9 18l6-6-6-6"/>
                     </svg>
@@ -229,19 +229,19 @@ export default function SubscribersPage() {
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {submissions.map((sub) => (
-                  <div key={sub.id} style={{ padding: "14px 20px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, display: "flex", alignItems: "center", gap: 14 }}>
+                  <div key={sub.id} style={{ padding: "14px 20px", background: "var(--adm-surface)", border: "1px solid var(--adm-border)", borderRadius: 12, display: "flex", alignItems: "center", gap: 14 }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: "0.875rem", color: "#F5F5F5", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <div style={{ fontSize: "0.875rem", color: "var(--adm-text)", fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {Object.values(sub.data)[0] || "Unnamed submission"}
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginTop: 2 }}>
+                      <div style={{ fontSize: "0.75rem", color: "var(--adm-muted)", marginTop: 2 }}>
                         {sub.formName} · {Object.keys(sub.data).length} fields
                       </div>
                     </div>
                     <span style={{ fontSize: "0.625rem", fontWeight: 700, padding: "2px 8px", borderRadius: 99, background: "rgba(167,139,250,0.1)", color: "#A78BFA", border: "1px solid rgba(167,139,250,0.2)" }}>
                       {sub.formName}
                     </span>
-                    <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.35)", flexShrink: 0 }}>{fmt(sub.submittedAt)}</span>
+                    <span style={{ fontSize: "0.75rem", color: "var(--adm-muted)", flexShrink: 0 }}>{fmt(sub.submittedAt)}</span>
                   </div>
                 ))}
               </div>
@@ -255,10 +255,10 @@ export default function SubscribersPage() {
 
 function Empty({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
-    <div style={{ textAlign: "center", padding: "60px 40px", background: "#0d0d0d", borderRadius: 16, border: "2px dashed rgba(255,255,255,0.06)" }}>
+    <div style={{ textAlign: "center", padding: "60px 40px", background: "var(--adm-surface)", borderRadius: 16, border: "2px dashed rgba(255,255,255,0.06)" }}>
       <div style={{ fontSize: "3rem", marginBottom: 16 }}>{icon}</div>
-      <h3 style={{ color: "#F5F5F5", fontWeight: 700, marginBottom: 8 }}>{title}</h3>
-      <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem" }}>{desc}</p>
+      <h3 style={{ color: "var(--adm-text)", fontWeight: 700, marginBottom: 8 }}>{title}</h3>
+      <p style={{ color: "var(--adm-muted)", fontSize: "0.875rem" }}>{desc}</p>
     </div>
   );
 }

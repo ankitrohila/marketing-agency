@@ -49,10 +49,11 @@ export async function POST(req: NextRequest) {
     const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
     if (adminEmail) {
       sendMail({
-        to: adminEmail,
+        to:      adminEmail,
         subject: `New contact from ${name} — BrandThink`,
-        html: contactFormEmailHtml({ name, email, company, budget, message }),
+        html:    contactFormEmailHtml({ name, email, company, budget, message }),
         replyTo: email,
+        source:  "contact",
       }).catch(console.error);
     }
 

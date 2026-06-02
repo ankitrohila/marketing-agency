@@ -56,13 +56,13 @@ export async function GET(request: NextRequest) {
   }));
 
   const recentActivity = [
-    { id: '1', type: 'post_published', description: 'Post "Why D2C Brands Fail..." was published', user: 'Aditya Raj', timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString() },
+    { id: '1', type: 'post_published', description: 'Post "Why D2C Brands Fail..." was published', user: 'Ankit Rohilla', timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString() },
     { id: '2', type: 'user_login', description: 'Priya Sharma logged in', user: 'Priya Sharma', timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString() },
     { id: '3', type: 'post_draft', description: 'New draft created: "Influencer Marketing ROI"', user: 'Rohit Nair', timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString() },
-    { id: '4', type: 'settings_updated', description: 'SEO settings updated for /blog', user: 'Aditya Raj', timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString() },
-    { id: '5', type: 'post_published', description: 'Post "MarTech Stack..." was published', user: 'Aditya Raj', timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() },
-    { id: '6', type: 'user_created', description: 'New user Anjali Menon added as contributor', user: 'Aditya Raj', timestamp: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString() },
-    { id: '7', type: 'redirect_created', description: 'Redirect /old-blog → /blog created', user: 'Aditya Raj', timestamp: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString() },
+    { id: '4', type: 'settings_updated', description: 'SEO settings updated for /blog', user: 'Ankit Rohilla', timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString() },
+    { id: '5', type: 'post_published', description: 'Post "MarTech Stack..." was published', user: 'Ankit Rohilla', timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() },
+    { id: '6', type: 'user_created', description: 'New user Anjali Menon added as contributor', user: 'Ankit Rohilla', timestamp: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString() },
+    { id: '7', type: 'redirect_created', description: 'Redirect /old-blog → /blog created', user: 'Ankit Rohilla', timestamp: new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString() },
     { id: '8', type: 'post_draft', description: 'Draft "AI & Future of Creative" saved', user: 'Priya Sharma', timestamp: new Date(Date.now() - 60 * 60 * 60 * 1000).toISOString() },
   ];
 

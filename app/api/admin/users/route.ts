@@ -92,8 +92,29 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Only super_admin can change roles' }, { status: 403 });
   }
 
+  // Capture old values before updating
+  const oldUser = { ...users[idx] };
   users[idx] = { ...users[idx], ...body, updatedAt: new Date().toISOString() };
   writeUsers(users);
+
+  // Propagate name/avatar changes to all posts authored by this user
+  const nameChanged   = body.name   && body.name   !== oldUser.name;
+  const avatarChanged = body.avatar && body.avatar !== oldUser.avatar;
+  if (nameChanged || avatarChanged) {
+    const POSTS_FILE = path.join(process.cwd(), 'data', 'posts.json');
+    try {
+      const posts: Array<{ author?: { name?: string; avatar?: string } }> =
+        JSON.parse(fs.readFileSync(POSTS_FILE, 'utf-8'));
+      let changed = false;
+      for (const post of posts) {
+        if (post.author && post.author.name === oldUser.name) {
+          if (avatarChanged) { post.author.avatar = body.avatar; changed = true; }
+          if (nameChanged)   { post.author.name   = body.name;   changed = true; }
+        }
+      }
+      if (changed) fs.writeFileSync(POSTS_FILE, JSON.stringify(posts, null, 2), 'utf-8');
+    } catch { /* silently skip if posts.json is missing */ }
+  }
 
   const { password: _pw, ...safeUser } = users[idx];
   return NextResponse.json({ user: safeUser });

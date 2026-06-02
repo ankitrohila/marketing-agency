@@ -72,7 +72,7 @@ export default function NewPostPage() {
       ...form,
       status: status || form.status,
       tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
-      author: user ? { name: user.name, role: "Author", avatar: user.avatar } : { name: "Aditya Raj", role: "Founder & CEO", avatar: "https://i.pravatar.cc/64?img=11" },
+      author: user ? { name: user.name, role: "Author", avatar: user.avatar } : { name: "Ankit Rohilla", role: "Founder & CEO", avatar: "https://i.pravatar.cc/64?img=68" },
       publishedAt: new Date().toISOString(),
     };
     const res = await fetch("/api/posts", {
@@ -98,7 +98,7 @@ export default function NewPostPage() {
   return (
     <>
       <AdminHeader title="New Post" user={user} />
-      <main style={{ flex: 1, padding: "24px 28px", display: "flex", flexDirection: "column", gap: 0, overflowY: "auto" }}>
+      <main className="adm-page-main" style={{ flex: 1, padding: "24px 28px", display: "flex", flexDirection: "column", gap: 0, overflowY: "auto" }}>
         {error && (
           <div style={{ padding: "10px 16px", background: "rgba(232,49,42,0.1)", border: "1px solid rgba(232,49,42,0.25)", borderRadius: 8, color: "#FF6B5B", fontSize: "0.875rem", marginBottom: 16 }}>{error}</div>
         )}
@@ -107,28 +107,28 @@ export default function NewPostPage() {
           {/* Main editor */}
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {/* Title */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "20px 20px" }}>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "20px 20px" }}>
               <input
                 type="text"
                 placeholder="Post Title"
                 value={form.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                style={{ width: "100%", background: "transparent", border: "none", color: "#F5F5F5", fontSize: "1.5rem", fontWeight: 800, letterSpacing: "-0.03em", outline: "none" }}
+                style={{ width: "100%", background: "transparent", border: "none", color: "var(--adm-text)", fontSize: "1.5rem", fontWeight: 800, letterSpacing: "-0.03em", outline: "none" }}
               />
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
-                <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>Slug:</span>
+                <span style={{ fontSize: "0.75rem", color: "var(--adm-muted)" }}>Slug:</span>
                 <input
                   type="text"
                   value={form.slug}
                   onChange={(e) => handleSlugChange(e.target.value)}
-                  style={{ flex: 1, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, padding: "4px 10px", color: "rgba(255,255,255,0.6)", fontSize: "0.8125rem", outline: "none", fontFamily: "monospace" }}
+                  style={{ flex: 1, background: "rgba(255,255,255,0.04)", border: "1px solid var(--adm-border2)", borderRadius: 6, padding: "4px 10px", color: "var(--adm-muted2)", fontSize: "0.8125rem", outline: "none", fontFamily: "monospace" }}
                 />
               </div>
             </div>
 
             {/* Excerpt */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "16px 20px" }}>
-              <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Excerpt</label>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "16px 20px" }}>
+              <label style={{ display: "block", fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Excerpt</label>
               <textarea
                 placeholder="2-3 sentence summary of the post..."
                 value={form.excerpt}
@@ -139,17 +139,17 @@ export default function NewPostPage() {
             </div>
 
             {/* Content */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "16px 20px" }}>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "16px 20px" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-                <label style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Content (HTML)</label>
-                <span style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)" }}>{wordCount} words</span>
+                <label style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Content (HTML)</label>
+                <span style={{ fontSize: "0.6875rem", color: "var(--adm-muted)" }}>{wordCount} words</span>
               </div>
               <textarea
                 placeholder="<h2>Heading</h2><p>Your content here...</p>"
                 value={form.content}
                 onChange={(e) => setForm((f) => ({ ...f, content: e.target.value }))}
                 rows={20}
-                style={{ width: "100%", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 8, padding: "12px 14px", color: "rgba(255,255,255,0.8)", fontSize: "0.875rem", lineHeight: 1.7, outline: "none", resize: "vertical", fontFamily: "monospace" }}
+                style={{ width: "100%", background: "rgba(255,255,255,0.02)", border: "1px solid var(--adm-border)", borderRadius: 8, padding: "12px 14px", color: "rgba(255,255,255,0.8)", fontSize: "0.875rem", lineHeight: 1.7, outline: "none", resize: "vertical", fontFamily: "monospace" }}
               />
             </div>
           </div>
@@ -157,28 +157,28 @@ export default function NewPostPage() {
           {/* Sidebar */}
           <div style={{ display: "flex", flexDirection: "column", gap: 14, position: "sticky", top: 20 }}>
             {/* Publish */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 18px" }}>
-              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>Publish</h4>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 18px" }}>
+              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>Publish</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 14 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.5)" }}>Status</span>
-                  <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))} style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#F5F5F5", fontSize: "0.8125rem", padding: "4px 8px", outline: "none", cursor: "pointer" }}>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--adm-muted2)" }}>Status</span>
+                  <select value={form.status} onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))} style={{ background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 6, color: "var(--adm-text)", fontSize: "0.8125rem", padding: "4px 8px", outline: "none", cursor: "pointer" }}>
                     <option value="draft">Draft</option>
                     <option value="published">Published</option>
                     <option value="pending">Pending</option>
                   </select>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.5)" }}>Featured</span>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--adm-muted2)" }}>Featured</span>
                   <input type="checkbox" checked={form.featured} onChange={(e) => setForm((f) => ({ ...f, featured: e.target.checked }))} style={{ cursor: "pointer", width: 16, height: 16 }} />
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.5)" }}>Read Time</span>
-                  <input type="text" value={form.readTime} onChange={(e) => setForm((f) => ({ ...f, readTime: e.target.value }))} style={{ width: 80, background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#F5F5F5", fontSize: "0.8125rem", padding: "4px 8px", outline: "none", textAlign: "right" }} />
+                  <span style={{ fontSize: "0.8125rem", color: "var(--adm-muted2)" }}>Read Time</span>
+                  <input type="text" value={form.readTime} onChange={(e) => setForm((f) => ({ ...f, readTime: e.target.value }))} style={{ width: 80, background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 6, color: "var(--adm-text)", fontSize: "0.8125rem", padding: "4px 8px", outline: "none", textAlign: "right" }} />
                 </div>
               </div>
               <div style={{ display: "flex", gap: 8 }}>
-                <button onClick={() => handleSave("draft")} disabled={saving} style={{ flex: 1, padding: "9px", borderRadius: 8, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.7)", fontSize: "0.8125rem", fontWeight: 600, cursor: "pointer" }}>
+                <button onClick={() => handleSave("draft")} disabled={saving} style={{ flex: 1, padding: "9px", borderRadius: 8, background: "rgba(255,255,255,0.05)", border: "1px solid var(--adm-border2)", color: "rgba(255,255,255,0.7)", fontSize: "0.8125rem", fontWeight: 600, cursor: "pointer" }}>
                   {saving ? "..." : "Save Draft"}
                 </button>
                 <button onClick={() => handleSave("published")} disabled={saving} style={{ flex: 1, padding: "9px", borderRadius: 8, background: "linear-gradient(135deg, #E8312A 0%, #FF6B1A 100%)", border: "none", color: "#fff", fontSize: "0.8125rem", fontWeight: 700, cursor: "pointer" }}>
@@ -189,38 +189,38 @@ export default function NewPostPage() {
             </div>
 
             {/* Category */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 18px" }}>
-              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Category</h4>
-              <select value={form.category} onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))} style={{ width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, color: "#F5F5F5", fontSize: "0.875rem", padding: "9px 10px", outline: "none", cursor: "pointer" }}>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 18px" }}>
+              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Category</h4>
+              <select value={form.category} onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))} style={{ width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 8, color: "var(--adm-text)", fontSize: "0.875rem", padding: "9px 10px", outline: "none", cursor: "pointer" }}>
                 {CATEGORIES.map((c) => <option key={c}>{c}</option>)}
               </select>
             </div>
 
             {/* Tags */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 18px" }}>
-              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Tags</h4>
-              <input type="text" placeholder="tag1, tag2, tag3" value={form.tags} onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))} style={{ width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, color: "#F5F5F5", fontSize: "0.875rem", padding: "9px 10px", outline: "none" }} />
-              <p style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.3)", marginTop: 6 }}>Separate with commas</p>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 18px" }}>
+              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Tags</h4>
+              <input type="text" placeholder="tag1, tag2, tag3" value={form.tags} onChange={(e) => setForm((f) => ({ ...f, tags: e.target.value }))} style={{ width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 8, color: "var(--adm-text)", fontSize: "0.875rem", padding: "9px 10px", outline: "none" }} />
+              <p style={{ fontSize: "0.6875rem", color: "var(--adm-muted)", marginTop: 6 }}>Separate with commas</p>
             </div>
 
             {/* Cover image */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 18px" }}>
-              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Cover Image</h4>
-              <input type="text" placeholder="https://images.unsplash.com/..." value={form.coverImage} onChange={(e) => setForm((f) => ({ ...f, coverImage: e.target.value }))} style={{ width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, color: "#F5F5F5", fontSize: "0.8125rem", padding: "9px 10px", outline: "none" }} />
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 18px" }}>
+              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>Cover Image</h4>
+              <input type="text" placeholder="https://images.unsplash.com/..." value={form.coverImage} onChange={(e) => setForm((f) => ({ ...f, coverImage: e.target.value }))} style={{ width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 8, color: "var(--adm-text)", fontSize: "0.8125rem", padding: "9px 10px", outline: "none" }} />
               {form.coverImage && <img src={form.coverImage} alt="Cover preview" style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 8, marginTop: 10 }} />}
             </div>
 
             {/* SEO */}
-            <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 18px" }}>
-              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>SEO</h4>
+            <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 18px" }}>
+              <h4 style={{ fontSize: "0.6875rem", fontWeight: 700, color: "var(--adm-muted)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>SEO</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 <div>
-                  <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: 5 }}>Meta Title ({form.seo.metaTitle.length}/60)</label>
-                  <input type="text" value={form.seo.metaTitle} onChange={(e) => setForm((f) => ({ ...f, seo: { ...f.seo, metaTitle: e.target.value } }))} style={{ width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#F5F5F5", fontSize: "0.8125rem", padding: "7px 10px", outline: "none" }} />
+                  <label style={{ display: "block", fontSize: "0.75rem", color: "var(--adm-muted)", marginBottom: 5 }}>Meta Title ({form.seo.metaTitle.length}/60)</label>
+                  <input type="text" value={form.seo.metaTitle} onChange={(e) => setForm((f) => ({ ...f, seo: { ...f.seo, metaTitle: e.target.value } }))} style={{ width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 6, color: "var(--adm-text)", fontSize: "0.8125rem", padding: "7px 10px", outline: "none" }} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: 5 }}>Meta Description ({form.seo.metaDesc.length}/160)</label>
-                  <textarea value={form.seo.metaDesc} onChange={(e) => setForm((f) => ({ ...f, seo: { ...f.seo, metaDesc: e.target.value } }))} rows={3} style={{ width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#F5F5F5", fontSize: "0.8125rem", padding: "7px 10px", outline: "none", resize: "vertical" }} />
+                  <label style={{ display: "block", fontSize: "0.75rem", color: "var(--adm-muted)", marginBottom: 5 }}>Meta Description ({form.seo.metaDesc.length}/160)</label>
+                  <textarea value={form.seo.metaDesc} onChange={(e) => setForm((f) => ({ ...f, seo: { ...f.seo, metaDesc: e.target.value } }))} rows={3} style={{ width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 6, color: "var(--adm-text)", fontSize: "0.8125rem", padding: "7px 10px", outline: "none", resize: "vertical" }} />
                 </div>
               </div>
             </div>

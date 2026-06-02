@@ -635,7 +635,121 @@ body:has(button:hover) .cursor-ring {
   .post-layout-grid { grid-template-columns: 1fr !important; }
   .post-sidebar { display: none !important; }
 }
+@media (max-width: 768px) {
+  /* Featured post card: stack image above text */
+  .featured-post-grid { grid-template-columns: 1fr !important; }
+  .featured-post-img  { height: 260px !important; min-height: 0 !important; }
+}
 @media (max-width: 640px) {
   .post-share-row { flex-direction: column; align-items: flex-start !important; }
   .post-share-row .share-btns { margin-left: 0 !important; }
+  .featured-post-img { height: 200px !important; }
+  /* Blog page padding fix */
+  .blog-hero-padding { padding-left: 16px !important; padding-right: 16px !important; }
+}
+
+/* ─── Admin Panel Responsive Utilities ─────────────────────────────── */
+
+/* 4-column stats row (dashboard) */
+.adm-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+/* Main chart + side panel row */
+.adm-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+/* Activity + lead stats row */
+.adm-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+}
+
+/* Post editor: editor + sidebar */
+.adm-post-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Post editor: meta SEO 2-col inside */
+.adm-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Admin toolbar/action bar */
+.adm-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* ── At 1100px charts start stacking ──────────────────────────── */
+@media (max-width: 1100px) {
+  .adm-charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Tablet ≤960px ──────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .adm-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .adm-bottom-row {
+    grid-template-columns: 1fr;
+  }
+  .adm-post-layout {
+    grid-template-columns: 1fr;
+  }
+  .adm-post-sidebar {
+    position: static !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+  .adm-welcome-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+
+/* ── Mobile ≤640px ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .adm-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .adm-charts-row {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .adm-bottom-row {
+    gap: 14px;
+  }
+  .adm-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .adm-action-bar {
+    gap: 6px;
+  }
+  .adm-page-main {
+    padding: 16px 14px !important;
+  }
+  .adm-welcome-btns {
+    flex-wrap: wrap;
+    gap: 6px !important;
+  }
 }

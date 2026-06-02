@@ -8,6 +8,16 @@
       "budget": "",
       "message": "Hello BrandThink!",
       "createdAt": "2026-05-26T06:23:07.730Z"
+    },
+    {
+      "id": "1780390537061",
+      "name": "test",
+      "email": "test@gmail.com",
+      "company": "test",
+      "budget": "test",
+      "message": "test",
+      "createdAt": "2026-06-02T08:55:37.061Z",
+      "status": "new"
     }
   ]
 }

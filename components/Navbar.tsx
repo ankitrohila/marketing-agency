@@ -52,83 +52,21 @@ const SERVICES = [
 const LINKS: Array<{
   label: string;
   href: string;
-  counter?: number;
   megaMenu?: boolean;
 }> = [
   { label: "Services", href: "/services", megaMenu: true },
-  { label: "Work",     href: "/work",     counter: 48  },
-  { label: "Blog",     href: "/blog",     counter: 24  },
-  { label: "Insights", href: "/insights"              },
-  { label: "About",    href: "/about"                 },
-  { label: "Contact",  href: "/contact"               },
+  { label: "Work",     href: "/work"     },
+  { label: "Blog",     href: "/blog"     },
+  { label: "Insights", href: "/insights" },
+  { label: "About",    href: "/about"    },
+  { label: "Contact",  href: "/contact"  },
 ];
 
 /* ─────────────────────────────────────────────── */
-/*  FLIP LABEL — counter scroll animation          */
+/*  LABEL                                          */
 /* ─────────────────────────────────────────────── */
-function FlipLabel({ label, counter }: { label: string; counter?: number }) {
-  const [hovered, setHovered] = useState(false);
-  const [count,   setCount]   = useState<number | null>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  function startCount() {
-    if (!counter) return;
-    setHovered(true);
-    let n = 0;
-    timerRef.current = setInterval(() => {
-      n += Math.ceil(counter / 10);
-      if (n >= counter) {
-        n = counter;
-        clearInterval(timerRef.current!);
-      }
-      setCount(n);
-    }, 40);
-  }
-
-  function stopCount() {
-    setHovered(false);
-    if (timerRef.current) clearInterval(timerRef.current);
-    setCount(null);
-  }
-
-  return (
-    <span
-      onMouseEnter={startCount}
-      onMouseLeave={stopCount}
-      style={{ display: "flex", alignItems: "center", gap: 5 }}
-    >
-      {/* Label flips up on hover */}
-      <span style={{
-        display: "inline-block",
-        transform: hovered && counter ? "translateY(-2px)" : "translateY(0)",
-        transition: "transform 0.25s var(--ease-out)",
-      }}>
-        {label}
-      </span>
-      {/* Counter badge slides in */}
-      {counter && (
-        <span style={{
-          display: "inline-flex",
-          alignItems: "center",
-          justifyContent: "center",
-          minWidth: 20,
-          height: 18,
-          padding: "0 5px",
-          borderRadius: 99,
-          fontSize: "0.5625rem",
-          fontWeight: 800,
-          letterSpacing: "0.02em",
-          background: hovered ? "rgba(232,49,42,0.2)" : "rgba(255,255,255,0.07)",
-          color: hovered ? "#E8312A" : "rgba(255,255,255,0.4)",
-          border: hovered ? "1px solid rgba(232,49,42,0.35)" : "1px solid rgba(255,255,255,0.1)",
-          transition: "all 0.2s",
-          transform: hovered ? "scale(1.1)" : "scale(1)",
-        }}>
-          {hovered && count !== null ? count : counter}
-        </span>
-      )}
-    </span>
-  );
+function FlipLabel({ label }: { label: string }) {
+  return <span>{label}</span>;
 }
 
 /* ─────────────────────────────────────────────── */
@@ -285,9 +223,9 @@ function BrandMark({ size = 44 }: { size?: number }) {
     <Image
       src="/logo.png"
       alt="BrandThink"
-      width={size * 2.8}
+      width={size}
       height={size}
-      style={{ objectFit: "contain", flexShrink: 0 }}
+      style={{ objectFit: "contain", flexShrink: 0, borderRadius: 8 }}
       priority
     />
   );
@@ -368,7 +306,7 @@ export default function Navbar() {
                   onMouseEnter={(e) => (e.currentTarget.style.color = "var(--bt-white)")}
                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--bt-muted)")}
                 >
-                  <FlipLabel label={link.label} counter={link.counter} />
+                  <FlipLabel label={link.label} />
                 </Link>
               )
             )}
@@ -482,9 +420,6 @@ export default function Navbar() {
                   onMouseLeave={(e) => (e.currentTarget.style.color = "var(--bt-white)")}
                 >
                   {link.label}
-                  {link.counter && (
-                    <span style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--bt-muted)" }}>{link.counter}</span>
-                  )}
                 </Link>
               )}
             </div>
@@ -505,8 +440,8 @@ export default function Navbar() {
           </Link>
           <div style={{ marginTop: 24, display: "flex", gap: 16, justifyContent: "center" }}>
             {[
-              { label: "Email", href: "mailto:adityaraj@thebrandthink.com", icon: "✉" },
-              { label: "Phone", href: "tel:+919571361543", icon: "📞" },
+              { label: "Email", href: "mailto:rohilla77@gmail.com", icon: "✉" },
+              { label: "Phone", href: "tel:+918950205038", icon: "📞" },
             ].map((item) => (
               <a
                 key={item.label}

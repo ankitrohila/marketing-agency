@@ -1,0 +1,18 @@
+{
+  "bookings": [
+    {
+      "id": "56ae7b2e-ec5a-44c7-a87b-83f7a4593a8a",
+      "name": "Ankit Rohilla",
+      "email": "ankit.rohilla@thebrandthink.com",
+      "phone": "8950205038",
+      "company": "brand",
+      "service": "Free 30-min Strategy Call",
+      "date": "2026-06-02",
+      "time": "10:00 AM",
+      "notes": "",
+      "zoomLink": "https://zoom.us/j/2962458699",
+      "status": "confirmed",
+      "createdAt": "2026-06-01T08:04:32.974Z"
+    }
+  ]
+}

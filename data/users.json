@@ -1,13 +1,14 @@
 [
   {
     "id": "1",
-    "name": "Aditya Raj",
-    "email": "admin@thebrandthink.com",
+    "name": "Ankit",
+    "email": "rohilla77@gmail.com",
     "password": "admin123",
     "role": "super_admin",
     "avatar": "https://i.pravatar.cc/64?img=11",
     "createdAt": "2024-01-01T00:00:00Z",
-    "status": "active"
+    "status": "active",
+    "updatedAt": "2026-06-02T07:29:32.668Z"
   },
   {
     "id": "2",

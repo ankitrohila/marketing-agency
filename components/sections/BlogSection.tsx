@@ -120,7 +120,7 @@ export default function BlogSection() {
 
         {/* Cards grid */}
         {!loaded ? (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: 24 }}>
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
@@ -138,7 +138,7 @@ export default function BlogSection() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+              gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
               gap: 24,
             }}
           >
@@ -306,14 +306,6 @@ export default function BlogSection() {
         </div>
       </div>
 
-      <style>{`
-        @media (max-width: 960px) {
-          .blog-preview-grid { grid-template-columns: 1fr 1fr !important; }
-        }
-        @media (max-width: 640px) {
-          .blog-preview-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }

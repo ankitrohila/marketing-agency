@@ -1,0 +1,64 @@
+{
+  "logs": [
+    {
+      "id": "1780390541519g9ao",
+      "to": "rohilla77@gmail.com",
+      "subject": "New contact from test — BrandThink",
+      "source": "contact",
+      "status": "sent",
+      "messageId": "<8b5469f7-5bb5-95a0-2e0e-e0d1f5d04e40@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-02T08:55:41.519Z"
+    },
+    {
+      "id": "1780346273266galh",
+      "to": "ankit.rohilla@thebrandthink.com",
+      "subject": "Your booking is confirmed — Free 30-min Strategy Call with BrandThink",
+      "source": "booking-accepted",
+      "status": "sent",
+      "messageId": "<4077b413-62a9-fbed-5f5a-c9d4a3c56fc0@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-01T20:37:53.266Z"
+    },
+    {
+      "id": "178030107696491jo",
+      "to": "ankit.rohilla@thebrandthink.com",
+      "subject": "Booking confirmed — Free 30-min Strategy Call with BrandThink",
+      "source": "booking-client",
+      "status": "sent",
+      "messageId": "<5dff1e3d-1eac-8077-f2ed-b2ecc836e42d@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-01T08:04:36.964Z"
+    },
+    {
+      "id": "1780301076647uwgi",
+      "to": "rohilla77@gmail.com",
+      "subject": "New booking: Ankit Rohilla — Free 30-min Strategy Call on 2026-06-02 at 10:00 AM",
+      "source": "booking-admin",
+      "status": "sent",
+      "messageId": "<edc4d988-2a3c-f598-58ba-40555c7d207a@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-01T08:04:36.647Z"
+    },
+    {
+      "id": "1780301015663guo3",
+      "to": "rohilla77@gmail.com",
+      "subject": "New lead: Ankit Rohilla — BrandThink",
+      "source": "lead",
+      "status": "sent",
+      "messageId": "<11284eb7-97a3-4378-5566-8ec17370b75b@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-01T08:03:35.663Z"
+    },
+    {
+      "id": "1780300539038gfd4",
+      "to": "rohilla77@gmail.com",
+      "subject": "✅ SMTP Test — BrandThink (1:25:35 pm)",
+      "source": "test",
+      "status": "sent",
+      "messageId": "<18ad775b-c7a5-c1fa-61da-d8ab74ef5f9c@gmail.com>",
+      "error": null,
+      "sentAt": "2026-06-01T07:55:39.038Z"
+    }
+  ]
+}

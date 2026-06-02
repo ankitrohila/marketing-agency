@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -43,6 +44,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     setChecking(false);
   }, [pathname, router]);
+
+  // Refresh user state when profile is updated from any admin page
+  useEffect(() => {
+    const refreshUser = () => {
+      const stored = localStorage.getItem("bt_admin_user");
+      if (stored) {
+        try { setUser(JSON.parse(stored)); } catch { /* ignore */ }
+      }
+    };
+    window.addEventListener("admin:profileUpdated", refreshUser);
+    return () => window.removeEventListener("admin:profileUpdated", refreshUser);
+  }, []);
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -165,9 +178,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 <line x1="3" y1="18" x2="21" y2="18"/>
               </svg>
             </button>
-            <span style={{ fontSize: "1rem", fontWeight: 800, color: "#E8312A", letterSpacing: "-0.04em" }}>
-              BrandThink Admin
-            </span>
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={32}
+              height={32}
+              style={{ objectFit: "contain", borderRadius: 7 }}
+            />
             {user ? (
               <img src={user.avatar} alt={user.name}
                 style={{ width: 32, height: 32, borderRadius: "50%", objectFit: "cover" }} />

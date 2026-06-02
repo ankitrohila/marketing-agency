@@ -82,9 +82,9 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="BrandThink"
-                width={160}
+                width={56}
                 height={56}
-                style={{ objectFit: "contain" }}
+                style={{ objectFit: "contain", borderRadius: 8 }}
               />
             </Link>
             <p style={{ fontSize: "0.9375rem", color: "var(--bt-muted)", lineHeight: 1.7, maxWidth: 280, marginBottom: 28 }}>
@@ -148,7 +148,7 @@ export default function Footer() {
           © {new Date().getFullYear()} BrandThink. All rights reserved.
         </p>
         <p style={{ fontSize: "0.8125rem", color: "var(--bt-dim)" }}>
-          Bangalore, India · adityaraj@thebrandthink.com
+          Sonipat, Haryana · rohilla77@gmail.com
         </p>
       </div>
     </footer>

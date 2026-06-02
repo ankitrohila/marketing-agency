@@ -13,6 +13,7 @@ interface AdminUser {
 interface SiteSettings {
   siteName: string;
   tagline: string;
+  siteUrl: string;
   email: string;
   phone: string;
   address: string;
@@ -64,14 +65,14 @@ export default function AdminSettingsPage() {
     setSettings((prev) => prev ? { ...prev, [key]: value } : prev);
   }
 
-  const inputStyle: React.CSSProperties = { width: "100%", background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 8, color: "#F5F5F5", fontSize: "0.875rem", padding: "10px 12px", outline: "none" };
-  const labelStyle: React.CSSProperties = { display: "block", fontSize: "0.8125rem", color: "rgba(255,255,255,0.5)", marginBottom: 6 };
+  const inputStyle: React.CSSProperties = { width: "100%", background: "var(--adm-card2)", border: "1px solid var(--adm-border2)", borderRadius: 8, color: "var(--adm-text)", fontSize: "0.875rem", padding: "10px 12px", outline: "none" };
+  const labelStyle: React.CSSProperties = { display: "block", fontSize: "0.8125rem", color: "var(--adm-muted2)", marginBottom: 6 };
 
   if (!settings) {
     return (
       <>
         <AdminHeader title="Settings" user={user} />
-        <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.3)" }}>Loading...</main>
+        <main style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--adm-muted)" }}>Loading...</main>
       </>
     );
   }
@@ -81,9 +82,9 @@ export default function AdminSettingsPage() {
       <AdminHeader title="Site Settings" user={user} />
       <main style={{ flex: 1, overflowY: "auto" }}>
         {/* Tabs */}
-        <div style={{ display: "flex", borderBottom: "1px solid rgba(255,255,255,0.06)", padding: "0 32px", background: "#0d0d0d", position: "sticky", top: 0, zIndex: 10 }}>
+        <div style={{ display: "flex", borderBottom: "1px solid var(--adm-border)", padding: "0 32px", background: "var(--adm-surface)", position: "sticky", top: 0, zIndex: 10 }}>
           {TABS.map((t, i) => (
-            <button key={t} onClick={() => setTab(i)} style={{ padding: "14px 18px", border: "none", background: "transparent", color: tab === i ? "#E8312A" : "rgba(255,255,255,0.4)", fontSize: "0.875rem", fontWeight: tab === i ? 700 : 500, cursor: "pointer", borderBottom: `2px solid ${tab === i ? "#E8312A" : "transparent"}`, whiteSpace: "nowrap", transition: "all 0.2s" }}>
+            <button key={t} onClick={() => setTab(i)} style={{ padding: "14px 18px", border: "none", background: "transparent", color: tab === i ? "var(--adm-text)" : "var(--adm-muted)", fontSize: "0.875rem", fontWeight: tab === i ? 700 : 400, cursor: "pointer", borderBottom: `2px solid ${tab === i ? "var(--adm-text)" : "transparent"}`, whiteSpace: "nowrap", transition: "all 0.15s" }}>
               {t}
             </button>
           ))}
@@ -93,7 +94,7 @@ export default function AdminSettingsPage() {
           {/* Tab 0: General */}
           {tab === 0 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 4 }}>General Settings</h3>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 4 }}>General Settings</h3>
               <div>
                 <label style={labelStyle}>Site Name</label>
                 <input type="text" value={settings.siteName} onChange={(e) => update("siteName", e.target.value)} style={inputStyle} />
@@ -101,6 +102,11 @@ export default function AdminSettingsPage() {
               <div>
                 <label style={labelStyle}>Tagline</label>
                 <input type="text" value={settings.tagline} onChange={(e) => update("tagline", e.target.value)} style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Website URL</label>
+                <input type="url" value={settings.siteUrl || ""} onChange={(e) => update("siteUrl", e.target.value)} placeholder="https://thebrandthink.com" style={inputStyle} />
+                <p style={{ fontSize: "0.6875rem", color: "var(--adm-muted)", marginTop: 4 }}>Used for canonical URLs, sitemaps, and OG tags</p>
               </div>
               <div>
                 <label style={labelStyle}>Contact Email</label>
@@ -114,15 +120,15 @@ export default function AdminSettingsPage() {
                 <label style={labelStyle}>Address</label>
                 <input type="text" value={settings.address} onChange={(e) => update("address", e.target.value)} style={inputStyle} />
               </div>
-              <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "rgba(255,255,255,0.6)", marginBottom: 0, marginTop: 8 }}>Social Links</h4>
+              <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--adm-muted2)", marginBottom: 0, marginTop: 8 }}>Social Links</h4>
               {(["linkedin", "instagram", "twitter"] as const).map((s) => (
                 <div key={s}>
                   <label style={labelStyle}>{s.charAt(0).toUpperCase() + s.slice(1)}</label>
                   <input type="text" value={settings.socialLinks[s]} onChange={(e) => update("socialLinks", { ...settings.socialLinks, [s]: e.target.value })} style={inputStyle} />
                 </div>
               ))}
-              <button onClick={handleSave} disabled={saving} style={{ alignSelf: "flex-start", padding: "10px 24px", borderRadius: 8, background: "linear-gradient(135deg, #E8312A 0%, #FF6B1A 100%)", border: "none", color: "#fff", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}>
-                {saving ? "Saving..." : saved ? "Saved!" : "Save General Settings"}
+              <button onClick={handleSave} disabled={saving} style={{ alignSelf: "flex-start", padding: "10px 24px", borderRadius: 8, background: saving ? "var(--adm-card)" : "var(--adm-text)", border: "none", color: saving ? "var(--adm-muted)" : "var(--adm-bg)", fontSize: "0.875rem", fontWeight: 700, cursor: saving ? "not-allowed" : "pointer" }}>
+                {saving ? "Saving..." : saved ? "✓ Saved" : "Save General Settings"}
               </button>
             </div>
           )}
@@ -130,17 +136,17 @@ export default function AdminSettingsPage() {
           {/* Tab 1: Appearance */}
           {tab === 1 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 4 }}>Appearance Settings</h3>
-              <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "20px" }}>
-                <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 12 }}>Theme</h4>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 4 }}>Appearance Settings</h3>
+              <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "20px" }}>
+                <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 12 }}>Theme</h4>
                 <div style={{ display: "flex", gap: 12 }}>
                   {["Dark", "Light", "Auto"].map((t) => (
-                    <button key={t} style={{ padding: "10px 20px", borderRadius: 8, border: `1px solid ${t === "Dark" ? "#E8312A" : "rgba(255,255,255,0.08)"}`, background: t === "Dark" ? "rgba(232,49,42,0.1)" : "transparent", color: t === "Dark" ? "#E8312A" : "rgba(255,255,255,0.5)", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>{t}</button>
+                    <button key={t} style={{ padding: "10px 20px", borderRadius: 8, border: "1px solid var(--adm-border2)", background: "transparent", color: "var(--adm-muted2)", fontSize: "0.875rem", fontWeight: 600, cursor: "pointer" }}>{t}</button>
                   ))}
                 </div>
               </div>
-              <div style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "20px" }}>
-                <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 12 }}>Brand Colors</h4>
+              <div style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "20px" }}>
+                <h4 style={{ fontSize: "0.875rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 12 }}>Brand Colors</h4>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {[
                     { label: "Primary", color: "#E8312A" },
@@ -149,23 +155,23 @@ export default function AdminSettingsPage() {
                     { label: "Card", color: "#222222" },
                   ].map((c) => (
                     <div key={c.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 6, background: c.color, border: "1px solid rgba(255,255,255,0.1)" }} />
+                      <div style={{ width: 28, height: 28, borderRadius: 6, background: c.color, border: "1px solid var(--adm-border2)" }} />
                       <div>
-                        <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#F5F5F5" }}>{c.label}</div>
-                        <div style={{ fontSize: "0.6875rem", color: "rgba(255,255,255,0.35)", fontFamily: "monospace" }}>{c.color}</div>
+                        <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--adm-text)" }}>{c.label}</div>
+                        <div style={{ fontSize: "0.6875rem", color: "var(--adm-muted)", fontFamily: "monospace" }}>{c.color}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-              <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.3)" }}>Theme and color customization is managed via CSS variables in globals.css.</p>
+              <p style={{ fontSize: "0.8125rem", color: "var(--adm-muted)" }}>Theme and color customization is managed via CSS variables in globals.css.</p>
             </div>
           )}
 
           {/* Tab 2: Email */}
           {tab === 2 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 4 }}>Email Settings</h3>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 4 }}>Email Settings</h3>
               {[
                 { label: "SMTP Host", placeholder: "smtp.gmail.com" },
                 { label: "SMTP Port", placeholder: "587" },
@@ -179,27 +185,27 @@ export default function AdminSettingsPage() {
                   <input type={f.label.includes("Password") ? "password" : "text"} placeholder={f.placeholder} style={inputStyle} />
                 </div>
               ))}
-              <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.3)" }}>Email configuration requires server environment variables. Contact your hosting provider.</p>
+              <p style={{ fontSize: "0.8125rem", color: "var(--adm-muted)" }}>Email configuration requires server environment variables. Contact your hosting provider.</p>
             </div>
           )}
 
           {/* Tab 3: Integrations */}
           {tab === 3 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 4 }}>Third-Party Integrations</h3>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 4 }}>Third-Party Integrations</h3>
               {[
                 { name: "Razorpay", desc: "Payment gateway for India", keys: ["API Key", "Secret Key"] },
                 { name: "Stripe", desc: "International payments", keys: ["Publishable Key", "Secret Key"] },
                 { name: "SendGrid", desc: "Transactional email", keys: ["API Key"] },
                 { name: "Twilio", desc: "SMS notifications", keys: ["Account SID", "Auth Token"] },
               ].map((integration) => (
-                <div key={integration.name} style={{ background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12, padding: "18px 20px" }}>
+                <div key={integration.name} style={{ background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12, padding: "18px 20px" }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
                     <div>
-                      <div style={{ fontSize: "0.9375rem", fontWeight: 700, color: "#F5F5F5" }}>{integration.name}</div>
-                      <div style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}>{integration.desc}</div>
+                      <div style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--adm-text)" }}>{integration.name}</div>
+                      <div style={{ fontSize: "0.8125rem", color: "var(--adm-muted)" }}>{integration.desc}</div>
                     </div>
-                    <span style={{ padding: "3px 10px", borderRadius: 99, fontSize: "0.6875rem", fontWeight: 700, background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)" }}>Not connected</span>
+                    <span style={{ padding: "3px 10px", borderRadius: 99, fontSize: "0.6875rem", fontWeight: 700, background: "rgba(255,255,255,0.05)", color: "var(--adm-muted)" }}>Not connected</span>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     {integration.keys.map((k) => (
@@ -217,19 +223,19 @@ export default function AdminSettingsPage() {
           {/* Tab 4: Advanced */}
           {tab === 4 && (
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "#F5F5F5", marginBottom: 4 }}>Advanced Settings</h3>
+              <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--adm-text)", marginBottom: 4 }}>Advanced Settings</h3>
               {[
                 { label: "Maintenance Mode", key: "maintenanceMode" as const, type: "toggle", description: "Put the site in maintenance mode — visitors will see a maintenance page." },
                 { label: "Allow Comments", key: "allowComments" as const, type: "toggle", description: "Enable or disable comments on blog posts." },
               ].map((field) => (
-                <div key={field.key} style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, padding: "16px 18px", background: "#141414", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 12 }}>
+                <div key={field.key} style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, padding: "16px 18px", background: "var(--adm-card)", border: "1px solid var(--adm-border)", borderRadius: 12 }}>
                   <div>
-                    <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "#F5F5F5", marginBottom: 4 }}>{field.label}</div>
-                    <div style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.4)" }}>{field.description}</div>
+                    <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--adm-text)", marginBottom: 4 }}>{field.label}</div>
+                    <div style={{ fontSize: "0.8125rem", color: "var(--adm-muted)" }}>{field.description}</div>
                   </div>
                   <button
                     onClick={() => update(field.key, !settings[field.key])}
-                    style={{ width: 44, height: 24, borderRadius: 12, background: settings[field.key] ? "#E8312A" : "rgba(255,255,255,0.12)", border: "none", cursor: "pointer", position: "relative", flexShrink: 0, transition: "background 0.2s" }}
+                    style={{ width: 44, height: 24, borderRadius: 12, background: settings[field.key] ? "var(--adm-text)" : "var(--adm-border2)", border: "none", cursor: "pointer", position: "relative", flexShrink: 0, transition: "background 0.2s" }}
                   >
                     <div style={{ position: "absolute", top: 2, left: settings[field.key] ? 22 : 2, width: 20, height: 20, borderRadius: "50%", background: "#fff", transition: "left 0.2s", boxShadow: "0 1px 4px rgba(0,0,0,0.3)" }} />
                   </button>
@@ -251,8 +257,8 @@ export default function AdminSettingsPage() {
                   {["en-IN", "en-US", "en-GB", "hi-IN"].map((l) => <option key={l}>{l}</option>)}
                 </select>
               </div>
-              <button onClick={handleSave} disabled={saving} style={{ alignSelf: "flex-start", padding: "10px 24px", borderRadius: 8, background: "linear-gradient(135deg, #E8312A 0%, #FF6B1A 100%)", border: "none", color: "#fff", fontSize: "0.875rem", fontWeight: 700, cursor: "pointer" }}>
-                {saving ? "Saving..." : saved ? "Saved!" : "Save Advanced Settings"}
+              <button onClick={handleSave} disabled={saving} style={{ alignSelf: "flex-start", padding: "10px 24px", borderRadius: 8, background: saving ? "var(--adm-card)" : "var(--adm-text)", border: "none", color: saving ? "var(--adm-muted)" : "var(--adm-bg)", fontSize: "0.875rem", fontWeight: 700, cursor: saving ? "not-allowed" : "pointer" }}>
+                {saving ? "Saving..." : saved ? "✓ Saved" : "Save Advanced Settings"}
               </button>
             </div>
           )}

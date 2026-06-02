@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { sendMail, leadFormEmailHtml } from "@/lib/mailer";
 
 const DB_PATH = path.join(process.cwd(), "data", "leads.json");
 
@@ -34,6 +35,18 @@ export async function POST(req: NextRequest) {
     });
 
     fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+
+    // Notify admin of new lead (non-blocking)
+    const adminEmail = process.env.ADMIN_EMAIL || process.env.SMTP_USER;
+    if (adminEmail) {
+      sendMail({
+        to:      adminEmail,
+        subject: `New lead: ${name} — BrandThink`,
+        html:    leadFormEmailHtml({ name, email, company, phone, service, budget, message }),
+        replyTo: email,
+        source:  "lead",
+      }).catch(console.error);
+    }
 
     return NextResponse.json({ success: true, message: "Lead captured. We'll reach out shortly." });
   } catch (err) {
